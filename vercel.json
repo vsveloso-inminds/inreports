@@ -2,5 +2,9 @@
   "outputDirectory": ".",
   "buildCommand": null,
   "installCommand": null,
-  "framework": null
+  "framework": null,
+  "redirects": [
+    { "source": "/msa/pub/finep",  "destination": "/msa", "permanent": true },
+    { "source": "/msa/pub/finep/", "destination": "/msa", "permanent": true }
+  ]
 }

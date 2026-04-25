@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plataforma SIGMA · Machado Schutz · FINEP 2026</title>
+  <meta name="description" content="Hub de materiais da Plataforma SIGMA para o edital FINEP Mais Inovação Brasil 2026 — Machado Schutz Advogados + InMinds Technology">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:          #07110a;
+      --verde:       #00513B;
+      --verde-mid:   #00351f;
+      --verde-deep:  #001c10;
+      --bege:        #D7AE81;
+      --bege-dim:    rgba(215,174,129,.45);
+      --bege-faint:  rgba(215,174,129,.07);
+      --text:        #f0ead8;
+      --text-muted:  rgba(240,234,216,.5);
+      --border:      rgba(215,174,129,.11);
+      --border-on:   rgba(215,174,129,.36);
+      --radius:      2px;
+      --ff-display:  'Cormorant Garamond', Georgia, serif;
+      --ff-body:     'Jost', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 70% 55% at 15% 25%,  rgba(0,81,59,.45) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 45% at 88% 78%,  rgba(0,40,25,.55) 0%, transparent 55%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+      background-size: cover, cover, 300px 300px;
+      color: var(--text);
+      font-family: var(--ff-body);
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ───── NAV ───────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 48px;
+      background: rgba(7,17,10,.88);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .brand-sigma {
+      font-family: var(--ff-display); font-size: 26px; font-weight: 400;
+      color: var(--bege); line-height: 1; letter-spacing: -.5px;
+    }
+    .brand-rule { width: 1px; height: 20px; background: var(--border-on); }
+    .brand-name {
+      font-size: 10.5px; font-weight: 500; letter-spacing: 2.2px;
+      text-transform: uppercase; color: var(--bege-dim);
+    }
+    .search-wrap { position: relative; width: 268px; }
+    .search-wrap svg {
+      position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+      width: 13px; height: 13px; color: var(--bege-dim); pointer-events: none;
+    }
+    #search {
+      width: 100%; padding: 9px 16px 9px 36px;
+      background: var(--bege-faint); border: 1px solid var(--border);
+      border-radius: var(--radius); color: var(--text);
+      font-family: var(--ff-body); font-size: 12.5px; font-weight: 300;
+      letter-spacing: .4px; outline: none;
+      transition: border-color .2s, background .2s;
+    }
+    #search::placeholder { color: var(--text-muted); }
+    #search:focus { border-color: var(--border-on); background: rgba(215,174,129,.12); }
+
+    /* ───── HERO ──────────────────────────────────────── */
+    .hero {
+      max-width: 1200px; margin: 0 auto;
+      padding: 72px 48px 40px;
+      display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end;
+      animation: fadeUp .9s ease both;
+    }
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 10.5px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--bege); margin-bottom: 18px;
+    }
+    .hero-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--bege); }
+    .hero-title {
+      font-family: var(--ff-display);
+      font-size: clamp(54px, 7.5vw, 100px);
+      font-weight: 300; line-height: .92; letter-spacing: -1.5px; color: var(--text);
+    }
+    .hero-title em { font-style: italic; color: var(--bege); }
+    .hero-sub {
+      margin-top: 22px; font-size: 13.5px; font-weight: 300;
+      color: var(--text-muted); line-height: 1.8; max-width: 440px; letter-spacing: .3px;
+    }
+    .hero-aside { text-align: right; }
+    .aside-label {
+      font-size: 10px; letter-spacing: 2.2px; text-transform: uppercase;
+      color: var(--bege-dim); margin-bottom: 6px;
+    }
+    .aside-value { font-family: var(--ff-display); font-size: 17px; color: var(--bege); }
+    .aside-trl {
+      margin-top: 14px; font-size: 10px; letter-spacing: 1.8px;
+      text-transform: uppercase; color: var(--text-muted);
+    }
+    .hero-divider {
+      height: 1px; max-width: 1200px; margin: 0 auto 40px;
+      background: linear-gradient(90deg, rgba(215,174,129,.5) 0%, rgba(215,174,129,.08) 55%, transparent 100%);
+      animation: fadeUp .9s .08s ease both;
+    }
+
+    /* ───── FILTERS ───────────────────────────────────── */
+    .filters {
+      max-width: 1200px; margin: 0 auto; padding: 0 48px 28px;
+      display: flex; align-items: center; gap: 7px; flex-wrap: wrap;
+      animation: fadeUp .9s .15s ease both;
+    }
+    .filter-lbl {
+      font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--text-muted); margin-right: 6px;
+    }
+    .f-btn {
+      padding: 5px 15px; border: 1px solid var(--border); border-radius: var(--radius);
+      background: transparent; color: var(--text-muted);
+      font-family: var(--ff-body); font-size: 10.5px; letter-spacing: 1.8px;
+      text-transform: uppercase; cursor: pointer; transition: all .2s;
+    }
+    .f-btn:hover { border-color: var(--border-on); color: var(--bege); }
+    .f-btn.on { border-color: var(--border-on); color: var(--bege); background: var(--bege-faint); }
+
+    /* ───── GRID ──────────────────────────────────────── */
+    .grid {
+      max-width: 1200px; margin: 0 auto; padding: 0 48px 80px;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      animation: fadeUp .9s .22s ease both;
+    }
+
+    .card {
+      background: var(--bg); padding: 36px 40px;
+      position: relative; overflow: hidden;
+      text-decoration: none; color: inherit; display: block;
+      cursor: pointer; transition: background .25s;
+    }
+    .card:hover { background: rgba(0,28,16,.7); }
+
+    /* left accent line */
+    .card::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background: transparent; transition: background .25s;
+    }
+    .card:hover::before { background: var(--bege); }
+
+    /* glow on hover */
+    .card::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+      background: radial-gradient(ellipse 55% 70% at 50% 50%, rgba(215,174,129,.035) 0%, transparent 70%);
+      transition: opacity .4s;
+    }
+    .card:hover::after { opacity: 1; }
+
+    /* featured spans all 3 cols */
+    .card-feat { grid-column: 1 / -1; }
+
+    .card-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .card-tag {
+      font-size: 9.5px; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--bege); border: 1px solid rgba(215,174,129,.28);
+      padding: 4px 11px; border-radius: 1px;
+    }
+    .card-num { font-family: var(--ff-display); font-size: 13px; color: var(--text-muted); letter-spacing: 1px; }
+
+    /* ── FEATURED LAYOUT ── */
+    .feat-body { display: grid; grid-template-columns: 1fr 400px; gap: 48px; align-items: center; }
+    .card-title {
+      font-family: var(--ff-display);
+      font-size: clamp(26px, 3.2vw, 42px);
+      font-weight: 400; line-height: 1.05; letter-spacing: -.3px; color: var(--text);
+      margin-bottom: 14px;
+    }
+    .card-desc {
+      font-size: 13.5px; font-weight: 300; color: var(--text-muted);
+      line-height: 1.8; letter-spacing: .2px; margin-bottom: 24px;
+    }
+    .card-meta {
+      display: flex; align-items: center; gap: 18px;
+      font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--bege-dim);
+    }
+    .meta-item { display: flex; align-items: center; gap: 5px; }
+    .meta-item svg { width: 11px; height: 11px; }
+    .card-cta {
+      display: inline-flex; align-items: center; gap: 9px;
+      margin-top: 24px; font-family: var(--ff-body); font-size: 11px;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--bege);
+      text-decoration: none; border-bottom: 1px solid rgba(215,174,129,.28);
+      padding-bottom: 2px; transition: border-color .2s;
+    }
+    .card-cta:hover { border-color: var(--bege); }
+    .card-cta svg { width: 13px; height: 13px; transition: transform .2s; }
+    .card-cta:hover svg { transform: translateX(4px); }
+
+    /* video preview */
+    .preview {
+      position: relative; aspect-ratio: 16/9;
+      border-radius: var(--radius); overflow: hidden;
+      background: var(--verde-mid); display: flex; align-items: center; justify-content: center;
+    }
+    .preview-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #001c10 0%, var(--verde) 55%, #006b4f 100%);
+    }
+    .preview-deco {
+      position: absolute; inset: 0; z-index: 1;
+      display: flex; align-items: center; justify-content: center; gap: 10px; opacity: .18;
+    }
+    .bar {
+      width: 3px; border-radius: 2px; background: var(--bege);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    .bar:nth-child(1) { height: 30%; animation-delay: 0s; }
+    .bar:nth-child(2) { height: 55%; animation-delay: .15s; }
+    .bar:nth-child(3) { height: 80%; animation-delay: .3s; }
+    .bar:nth-child(4) { height: 60%; animation-delay: .45s; }
+    .bar:nth-child(5) { height: 75%; animation-delay: .6s; }
+    .bar:nth-child(6) { height: 42%; animation-delay: .75s; }
+    @keyframes pulse {
+      0%,100% { transform: scaleY(1); opacity: .18; }
+      50% { transform: scaleY(.55); opacity: .28; }
+    }
+    .preview-sigma {
+      position: absolute; z-index: 2;
+      font-family: var(--ff-display); font-size: 88px; font-weight: 300;
+      color: rgba(215,174,129,.15); letter-spacing: -2px; line-height: 1;
+    }
+    .play-btn {
+      position: absolute; inset: 0; z-index: 3;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .25s;
+    }
+    .play-btn:hover { background: rgba(0,0,0,.18); }
+    .play-ring {
+      width: 56px; height: 56px; border-radius: 50%;
+      border: 1.5px solid rgba(215,174,129,.55);
+      background: rgba(0,0,0,.38); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      transition: all .28s;
+    }
+    .play-btn:hover .play-ring {
+      border-color: var(--bege); background: rgba(215,174,129,.12);
+      transform: scale(1.1);
+    }
+    .play-ring svg { width: 16px; height: 16px; color: var(--bege); margin-left: 3px; }
+
+    /* ── SMALL CARD LAYOUT ── */
+    .card-sm .card-title { font-size: clamp(21px, 2.2vw, 30px); }
+    .card-icon {
+      width: 44px; height: 44px; border: 1px solid var(--border); border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 22px; transition: border-color .25s;
+    }
+    .card:hover .card-icon { border-color: var(--border-on); }
+    .card-icon svg { width: 18px; height: 18px; color: var(--bege); }
+
+    /* ── EMPTY STATE ── */
+    .empty {
+      display: none; grid-column: 1/-1;
+      padding: 80px 40px; text-align: center;
+    }
+    .empty.show { display: block; }
+    .empty p { font-family: var(--ff-display); font-size: 22px; font-weight: 300; font-style: italic; color: var(--text-muted); }
+
+    /* ───── MODAL ─────────────────────────────────────── */
+    .overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,.87); backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .3s;
+    }
+    .overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      width: 92vw; max-width: 980px; border-radius: var(--radius);
+      background: #0b1a10; border: 1px solid var(--border-on); overflow: hidden;
+      transform: translateY(18px); transition: transform .3s;
+    }
+    .overlay.open .modal { transform: translateY(0); }
+    .modal-hd {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 22px; border-bottom: 1px solid var(--border);
+    }
+    .modal-t { font-family: var(--ff-display); font-size: 17px; color: var(--text); }
+    .modal-x {
+      width: 30px; height: 30px; border: 1px solid var(--border); border-radius: var(--radius);
+      background: transparent; color: var(--text-muted); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: all .2s;
+    }
+    .modal-x:hover { border-color: var(--bege); color: var(--bege); }
+    .modal-x svg { width: 13px; height: 13px; }
+    #vid { width: 100%; aspect-ratio: 16/9; display: block; background: #000; }
+
+    /* ───── FOOTER ────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      max-width: 1200px; margin: 0 auto; padding: 28px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .foot-l { font-size: 11.5px; letter-spacing: .4px; color: var(--text-muted); line-height: 1.6; }
+    .foot-r { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--bege-dim); }
+
+    /* ───── ANIMATIONS ────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ───── HIDDEN ────────────────────────────────────── */
+    .card.hide { display: none; }
+
+    /* ───── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 960px) {
+      nav { padding: 14px 22px; }
+      .search-wrap { width: 190px; }
+      .hero { padding: 48px 22px 32px; grid-template-columns: 1fr; }
+      .hero-aside { text-align: left; margin-top: 24px; }
+      .hero-divider { margin-left: 22px; margin-right: 22px; }
+      .filters { padding: 0 22px 24px; }
+      .grid { padding: 0 0 48px; grid-template-columns: 1fr; }
+      .card-feat { grid-column: 1; }
+      .feat-body { grid-template-columns: 1fr; }
+      .preview { order: -1; }
+      footer { padding: 24px 22px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="brand" href="#">
+    <span class="brand-sigma">Σ</span>
+    <div class="brand-rule"></div>
+    <span class="brand-name">Machado Schutz · FINEP 2026</span>
+  </a>
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input id="search" type="text" placeholder="Buscar materiais…" autocomplete="off">
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">Sistema Integrado de Gestão</div>
+    <h1 class="hero-title">SIGMA<br><em>· FINEP</em></h1>
+    <p class="hero-sub">Materiais de submissão ao edital Mais Inovação Brasil — Rodada 2 · Tecnologias Digitais. Desenvolvido por InMinds Technology para Machado Schutz Advogados.</p>
+  </div>
+  <div class="hero-aside">
+    <div class="aside-label">Prazo de Submissão</div>
+    <div class="aside-value">Setembro · 2026</div>
+    <div class="aside-trl" style="margin-top:18px">Orçamento · R$ 5.000.000</div>
+    <div class="aside-trl" style="margin-top:4px">TRL 3 → 8 · 36 meses</div>
+  </div>
+</section>
+<div class="hero-divider"></div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <span class="filter-lbl">Filtrar</span>
+  <button class="f-btn on"  data-f="todos">Todos</button>
+  <button class="f-btn"     data-f="video">Vídeo</button>
+  <button class="f-btn"     data-f="relatorio">Relatório</button>
+  <button class="f-btn"     data-f="programa">Programa</button>
+  <button class="f-btn"     data-f="script">Script</button>
+</div>
+
+<!-- GRID -->
+<main class="grid" id="grid">
+
+  <!-- 01 · VÍDEO INSTITUCIONAL -->
+  <div class="card card-feat" data-tags="video vídeo institucional sigma finep apresentação narração" id="c-video">
+    <div class="card-head">
+      <span class="card-tag">Vídeo</span>
+      <span class="card-num">01 · 04</span>
+    </div>
+    <div class="feat-body">
+      <div>
+        <h2 class="card-title">Vídeo Institucional<br>Plataforma SIGMA</h2>
+        <p class="card-desc">Apresentação oficial da Plataforma SIGMA para o edital FINEP Mais Inovação Brasil. Narração neural pt-BR em dois interlocutores com identidade visual completa da Machado Schutz Advogados — 6 blocos temáticos, 10 minutos.</p>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            10 minutos
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            6 blocos
+          </span>
+          <span class="meta-item">MP4 · 29 MB</span>
+        </div>
+        <span class="card-cta" onclick="openModal()">
+          Assistir agora
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </div>
+      <div class="preview" onclick="openModal()">
+        <div class="preview-bg"></div>
+        <div class="preview-deco">
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+        <span class="preview-sigma">Σ</span>
+        <div class="play-btn">
+          <div class="play-ring">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 · RELATÓRIO EXECUTIVO -->
+  <a class="card card-sm" href="pub/finep/executiva.html" data-tags="relatorio executivo diretoria estrategia financeiro moat ict trl sigma finep">
+    <div class="card-head">
+      <span class="card-tag">Relatório</span>
+      <span class="card-num">02 · 04</span>
+    </div>
+    <div class="card-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+      </svg>
+    </div>
+    <h2 class="card-title">Relatório Executivo</h2>
+    <p class="card-desc">Visão estratégica, financeira e competitiva do projeto. Moat de 18 anos de dados proprietários, roadmap de 36 meses e orçamento detalhado de R$ 5M para a diretoria.</p>
+    <span class="card-cta">
+      Acessar
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </span>
+  </a>
+
+  <!-- 03 · PROGRAMA FINEP -->
+  <a class="card card-sm" href="pub/finep/programa.html" data-tags="programa finep técnico modulos roadmap cronograma orcamento inovacao lt1 lt2 sigma">
+    <div class="card-head">
+      <span class="card-tag">Programa</span>
+      <span class="card-num">03 · 04</span>
+    </div>
+    <div class="card-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+        <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+      </svg>
+    </div>
+    <h2 class="card-title">Programa FINEP</h2>
+    <p class="card-desc">Detalhamento técnico do programa de inovação: 9 módulos SIGMA, 3 fases de desenvolvimento, cronograma de 36 meses e enquadramento nas linhas LT 1.1, 1.2 e 2 do edital.</p>
+    <span class="card-cta">
+      Acessar
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </span>
+  </a>
+
+  <!-- 04 · SCRIPT DO VÍDEO -->
+  <a class="card card-sm" href="pub/finep/video_script.html" data-tags="script roteiro narração blocos visao futuro tributai sigma.ia sigma.data finep apresentação">
+    <div class="card-head">
+      <span class="card-tag">Script</span>
+      <span class="card-num">04 · 04</span>
+    </div>
+    <div class="card-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 20h9"/>
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
+    </div>
+    <h2 class="card-title">Script do Vídeo</h2>
+    <p class="card-desc">Roteiro completo da apresentação: 6 blocos narrativos, visão de futuro com 4 produtos do futuro, arquitetura da plataforma e posicionamento estratégico para avaliadores FINEP.</p>
+    <span class="card-cta">
+      Acessar
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </span>
+  </a>
+
+  <!-- Empty state -->
+  <div class="empty" id="empty">
+    <p>Nenhum material encontrado para esta busca.</p>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-l">
+    © 2026 Machado Schutz Advogados · Plataforma SIGMA — Sistema Integrado de Gestão<br>
+    Edital FINEP Mais Inovação Brasil · Rodada 2 · Tecnologias Digitais
+  </div>
+  <div class="foot-r">InMinds Technology</div>
+</footer>
+
+<!-- VIDEO MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-hd">
+      <span class="modal-t">Vídeo Institucional — Plataforma SIGMA · FINEP 2026</span>
+      <button class="modal-x" id="modal-close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <video id="vid" controls src="pub/finep/video.mp4" preload="none"></video>
+  </div>
+</div>
+
+<script>
+  /* ── search + filter ── */
+  const $search  = document.getElementById('search');
+  const $cards   = document.querySelectorAll('.card:not(.empty)');
+  const $empty   = document.getElementById('empty');
+  let   activeF  = 'todos';
+
+  function applyFilters() {
+    const q = $search.value.toLowerCase().trim();
+    let n = 0;
+    $cards.forEach(c => {
+      const tags = (c.dataset.tags || '').toLowerCase();
+      const text = c.innerText.toLowerCase();
+      const okSearch = !q || text.includes(q) || tags.includes(q);
+      const okFilter = activeF === 'todos' || tags.includes(activeF);
+      if (okSearch && okFilter) { c.classList.remove('hide'); n++; }
+      else                       { c.classList.add('hide'); }
+    });
+    $empty.classList.toggle('show', n === 0);
+  }
+
+  $search.addEventListener('input', applyFilters);
+
+  document.querySelectorAll('.f-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      activeF = btn.dataset.f;
+      applyFilters();
+    });
+  });
+
+  /* ── modal ── */
+  const $overlay = document.getElementById('overlay');
+  const $vid     = document.getElementById('vid');
+  const $close   = document.getElementById('modal-close');
+
+  function openModal() {
+    $overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    $overlay.classList.remove('open');
+    $vid.pause();
+    document.body.style.overflow = '';
+  }
+
+  $close.addEventListener('click', closeModal);
+  $overlay.addEventListener('click', e => { if (e.target === $overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* click on featured card (not on preview/cta) opens modal */
+  document.getElementById('c-video').addEventListener('click', e => {
+    if (!e.target.closest('.preview') && !e.target.closest('.card-cta')) openModal();
+  });
+</script>
+</body>
+</html>
