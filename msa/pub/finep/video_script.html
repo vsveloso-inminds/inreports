@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plataforma SIGMA — Script do Vídeo FINEP + Visão Futura</title>
+<style>
+  :root {
+    --verde: #00513B;
+    --verde-escuro: #003828;
+    --verde-claro: #006b4f;
+    --bege: #D7AE81;
+    --bege-claro: #f0e0c8;
+    --bege-muito-claro: #faf5ee;
+    --cinza: #4a4a4a;
+    --cinza-claro: #888;
+    --branco: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: #f7f4ef;
+    color: var(--cinza);
+    line-height: 1.75;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--verde-escuro);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo-sigma {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--bege);
+    letter-spacing: -1px;
+    font-family: 'Georgia', serif;
+  }
+  .logo-sigma span { color: var(--branco); font-size: 0.9rem; font-weight: 400; letter-spacing: 0; margin-left: 8px; vertical-align: middle; }
+  .badge-finep {
+    background: var(--bege);
+    color: var(--verde-escuro);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Arial', sans-serif;
+  }
+
+  /* ── CAPA ── */
+  .capa {
+    background: linear-gradient(135deg, var(--verde) 0%, var(--verde-escuro) 100%);
+    color: var(--branco);
+    padding: 72px 32px 64px;
+    text-align: center;
+  }
+  .capa .sigma-symbol {
+    font-size: 5rem;
+    color: var(--bege);
+    line-height: 1;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .capa h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    color: var(--branco);
+  }
+  .capa h2 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--bege-claro);
+    margin-bottom: 32px;
+  }
+  .capa-meta {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .capa-meta .tag {
+    background: rgba(215,174,129,0.2);
+    border: 1px solid rgba(215,174,129,0.4);
+    color: var(--bege-claro);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── NAV ÍNDICE ── */
+  .indice {
+    background: var(--branco);
+    border-left: 4px solid var(--bege);
+    margin: 40px 0 0;
+    padding: 28px 32px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .indice h3 {
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cinza-claro);
+    margin-bottom: 14px;
+    font-family: 'Arial', sans-serif;
+  }
+  .indice a {
+    display: block;
+    color: var(--verde);
+    text-decoration: none;
+    font-size: 0.92rem;
+    padding: 4px 0;
+    border-bottom: 1px solid #f0ece5;
+    font-family: 'Arial', sans-serif;
+  }
+  .indice a:hover { color: var(--bege); }
+  .indice a:last-child { border-bottom: none; }
+
+  /* ── SEÇÃO PARTE ── */
+  .parte-header {
+    background: var(--verde);
+    color: var(--branco);
+    padding: 32px 40px;
+    margin: 48px 0 0;
+    border-radius: 8px 8px 0 0;
+    position: relative;
+  }
+  .parte-header .parte-num {
+    font-size: 0.72rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--bege);
+    margin-bottom: 6px;
+    font-family: 'Arial', sans-serif;
+  }
+  .parte-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .parte-header p {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.75);
+    font-family: 'Arial', sans-serif;
+  }
+  .parte-body {
+    background: var(--branco);
+    border: 1px solid #e8e2d8;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 0 0 8px;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+
+  /* ── ESTRUTURA VÍDEO ── */
+  .video-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 28px 32px 24px;
+    background: var(--bege-muito-claro);
+    border-bottom: 1px solid #e8e2d8;
+  }
+  .video-info-item strong {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--cinza-claro);
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 4px;
+  }
+  .video-info-item span {
+    font-size: 0.88rem;
+    color: var(--cinza);
+    font-family: 'Arial', sans-serif;
+  }
+
+  /* ── BLOCO DO SCRIPT ── */
+  .bloco {
+    border-bottom: 1px solid #f0ece5;
+  }
+  .bloco:last-child { border-bottom: none; }
+
+  .bloco-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 32px 16px;
+    cursor: default;
+  }
+  .bloco-timecode {
+    background: var(--verde);
+    color: var(--bege);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    font-family: 'Arial', sans-serif;
+    flex-shrink: 0;
+  }
+  .bloco-titulo {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--verde-escuro);
+  }
+  .bloco-body {
+    padding: 0 32px 28px;
+  }
+
+  /* ── NARRADOR ── */
+  .narrador {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--bege);
+    background: var(--verde-escuro);
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    font-family: 'Arial', sans-serif;
+  }
+
+  /* ── FALA (CITAÇÃO) ── */
+  .fala {
+    background: var(--bege-muito-claro);
+    border-left: 3px solid var(--bege);
+    padding: 20px 24px;
+    margin: 8px 0 16px;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    font-size: 0.97rem;
+    line-height: 1.85;
+    color: #333;
+  }
+  .fala p { margin-bottom: 10px; }
+  .fala p:last-child { margin-bottom: 0; }
+  .fala strong {
+    font-style: normal;
+    color: var(--verde);
+  }
+
+  /* ── DIRETIVA DE CENA ── */
+  .cena {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    background: #f5f0ea;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    color: var(--cinza-claro);
+    font-family: 'Arial', sans-serif;
+    margin-top: 4px;
+  }
+  .cena::before {
+    content: '🎬';
+    flex-shrink: 0;
+    font-style: normal;
+  }
+
+  /* ── SEÇÃO PROPOSTA ── */
+  .secao {
+    padding: 28px 32px 24px;
+    border-bottom: 1px solid #f0ece5;
+  }
+  .secao:last-child { border-bottom: none; }
+  .secao h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--verde-escuro);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--bege-claro);
+  }
+  .secao h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--verde);
+    margin: 18px 0 8px;
+  }
+  .secao p {
+    font-size: 0.92rem;
+    margin-bottom: 12px;
+    color: #444;
+  }
+  .secao ul { padding-left: 20px; margin-bottom: 12px; }
+  .secao li { font-size: 0.92rem; color: #444; margin-bottom: 6px; }
+
+  /* ── DESTAQUE (MOAT) ── */
+  .destaque {
+    background: linear-gradient(135deg, var(--verde-escuro), var(--verde));
+    color: var(--branco);
+    padding: 24px 28px;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+  .destaque strong { color: var(--bege); }
+
+  /* ── TABELA ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    font-family: 'Arial', sans-serif;
+    margin: 16px 0;
+  }
+  th {
+    background: var(--verde);
+    color: var(--bege);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.5px;
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #e8e2d8;
+    color: #444;
+  }
+  tr:nth-child(even) td { background: var(--bege-muito-claro); }
+
+  /* ── RODAPÉ ── */
+  footer {
+    background: var(--verde-escuro);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 32px;
+    margin-top: 60px;
+    font-size: 0.78rem;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.8;
+  }
+  footer strong { color: var(--bege); }
+
+  @media (max-width: 600px) {
+    .capa h1 { font-size: 1.5rem; }
+    .parte-header, .bloco-body, .secao, .video-info { padding-left: 20px; padding-right: 20px; }
+    .bloco-header { padding-left: 20px; padding-right: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-sigma">Σ SIGMA <span>Plataforma Integrada</span></div>
+    <div class="badge-finep">FINEP 2026</div>
+  </div>
+</header>
+
+<!-- CAPA -->
+<section class="capa">
+  <span class="sigma-symbol">Σ</span>
+  <h1>Plataforma SIGMA</h1>
+  <h2>Script do Vídeo Obrigatório (10 min) + Seção Visão Futura da Proposta FINEP</h2>
+  <div class="capa-meta">
+    <span class="tag">Finep Mais Inovação Brasil — Rodada 2</span>
+    <span class="tag">Tecnologias Digitais</span>
+    <span class="tag">Machado Schutz + InMinds Technology</span>
+    <span class="tag">Prazo: 30/09/2026</span>
+  </div>
+</section>
+
+<!-- ÍNDICE -->
+<div class="container">
+  <div class="indice">
+    <h3>Índice</h3>
+    <a href="#parte1">Parte 1 — Script do Vídeo Obrigatório FINEP (10 minutos)</a>
+    <a href="#bloco1">&nbsp;&nbsp;&nbsp;Bloco 1 — Abertura e Contexto (0:00–1:30)</a>
+    <a href="#bloco2">&nbsp;&nbsp;&nbsp;Bloco 2 — O Problema e a Oportunidade (1:30–3:00)</a>
+    <a href="#bloco3">&nbsp;&nbsp;&nbsp;Bloco 3 — A Inovação: Plataforma SIGMA (3:00–5:30)</a>
+    <a href="#bloco4">&nbsp;&nbsp;&nbsp;Bloco 4 — Aderência às Linhas Temáticas FINEP (5:30–7:00)</a>
+    <a href="#bloco5">&nbsp;&nbsp;&nbsp;Bloco 5 — Capacidade Técnica e Infraestrutura (7:00–8:30)</a>
+    <a href="#bloco6">&nbsp;&nbsp;&nbsp;Bloco 6 — Fechamento e Visão de Futuro (8:30–10:00)</a>
+    <a href="#parte2">Parte 2 — Seção "Visão Futura" da Proposta FINEP</a>
+    <a href="#s51">&nbsp;&nbsp;&nbsp;5.1 O Contexto de Transformação do Mercado</a>
+    <a href="#s52">&nbsp;&nbsp;&nbsp;5.2 O Ativo Estratégico: 18 Anos de Dados Proprietários</a>
+    <a href="#s53">&nbsp;&nbsp;&nbsp;5.3 Os Produtos e Serviços do Futuro</a>
+    <a href="#s54">&nbsp;&nbsp;&nbsp;5.4 Impacto Setorial e Relevância Nacional</a>
+    <a href="#s55">&nbsp;&nbsp;&nbsp;5.5 Modelo de Negócio e Sustentabilidade</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PARTE 1 — SCRIPT DO VÍDEO
+═══════════════════════════════════════════ -->
+<div class="container">
+  <div id="parte1">
+    <div class="parte-header">
+      <div class="parte-num">Parte 1</div>
+      <h2>Script: Vídeo Obrigatório FINEP — 10 Minutos</h2>
+      <p>Edital item 6.9 — inovação e relevância · capacidade técnica e infraestrutura</p>
+    </div>
+    <div class="parte-body">
+
+      <!-- ESTRUTURA -->
+      <div class="video-info">
+        <div class="video-info-item">
+          <strong>Formato</strong>
+          <span>Apresentação em tela com narração (screen + talking head)</span>
+        </div>
+        <div class="video-info-item">
+          <strong>Quem aparece</strong>
+          <span>&lt;A Definir&gt; + Yuri Sanchez (Diretor Machado Schutz)</span>
+        </div>
+        <div class="video-info-item">
+          <strong>Tom</strong>
+          <span>Direto, confiante, técnico mas acessível — não corporativo demais</span>
+        </div>
+        <div class="video-info-item">
+          <strong>Duração total</strong>
+          <span>10 minutos | 6 blocos</span>
+        </div>
+      </div>
+
+      <!-- BLOCO 1 -->
+      <div class="bloco" id="bloco1">
+        <div class="bloco-header">
+          <span class="bloco-timecode">0:00 – 1:30</span>
+          <span class="bloco-titulo">Bloco 1 — Abertura e Contexto</span>
+        </div>
+        <div class="bloco-body">
+          <div class="narrador">Narrador: Yuri Sanchez — Diretor Executivo Machado Schutz</div>
+          <div class="fala">
+            <p>"O mercado tributário brasileiro está em transformação. A Reforma Tributária não é uma ameaça — é uma oportunidade para quem estiver pronto. E estar pronto significa ter inteligência de dados.</p>
+            <p>A Machado Schutz Advogados tem quase 18 anos de atuação no mercado tributário e fiscal brasileiro. Nesse tempo, acumulamos um patrimônio que vai além dos processos que ganhamos — acumulamos dados. Dados de clientes, de processos, de legislação, de jurisprudência, de padrões de comportamento fiscal de centenas de empresas brasileiras.</p>
+            <p>Hoje, esses dados vivem em planilhas. Amanhã, vão alimentar uma das plataformas de inteligência jurídica mais avançadas do país."</p>
+          </div>
+          <div class="cena">Exibe: tela da Plataforma SIGMA — slide de abertura com o símbolo Σ</div>
+        </div>
+      </div>
+
+      <!-- BLOCO 2 -->
+      <div class="bloco" id="bloco2">
+        <div class="bloco-header">
+          <span class="bloco-timecode">1:30 – 3:00</span>
+          <span class="bloco-titulo">Bloco 2 — O Problema e a Oportunidade</span>
+        </div>
+        <div class="bloco-body">
+          <div class="narrador">Narrador: &lt;A Definir&gt;</div>
+          <div class="fala">
+            <p>"O mercado jurídico-tributário brasileiro vive um paradoxo: é um dos mais complexos do mundo — o Brasil tem mais de 5.000 normas tributárias — mas opera com ferramentas do século passado. Planilhas, sistemas legados, dados fragmentados por área, por sócio, por escritório.</p>
+            <p>Quando o advogado precisa de uma informação estratégica, ela não está disponível. Quando o cliente quer entender seu risco tributário em tempo real, não existe essa resposta.</p>
+            <p>A Plataforma SIGMA foi criada para resolver exatamente esse problema — e para ir além. Não só organizar os dados de hoje, mas construir a inteligência que vai gerar valor no mercado de amanhã."</p>
+          </div>
+          <div class="cena">Exibe: diagrama antes/depois — Excel vs. SIGMA.DATA</div>
+        </div>
+      </div>
+
+      <!-- BLOCO 3 -->
+      <div class="bloco" id="bloco3">
+        <div class="bloco-header">
+          <span class="bloco-timecode">3:00 – 5:30</span>
+          <span class="bloco-titulo">Bloco 3 — A Inovação: Plataforma SIGMA</span>
+        </div>
+        <div class="bloco-body">
+          <div class="narrador">Narrador: &lt;A Definir&gt;</div>
+          <div class="fala">
+            <p>"A Plataforma SIGMA — Sistema Integrado de Gestão Machado Schutz — é uma plataforma digital integrada construída sobre três pilares que a diferenciam de qualquer solução de mercado.</p>
+            <p><strong>Primeiro pilar: dados como fundação.</strong><br>
+            O Alicerce de Dados do SIGMA implementa a arquitetura Medallion — camadas Bronze, Prata e Ouro — ingerindo e transformando dados brutos em inteligência acionável. XMLs fiscais, SPED, eSocial, diário oficial, jurisprudência, documentos jurídicos. Tudo estruturado, governado em conformidade com a LGPD, disponível para análise em tempo real.</p>
+            <p><strong>Segundo pilar: inteligência artificial jurídica.</strong><br>
+            O SIGMA.IA é um módulo transversal composto por três camadas. A IA Generativa, baseada em RAG e LLM especializado em direito tributário brasileiro, produz peças, pareceres e análises. A IA Preditiva modela probabilidades de êxito em processos, riscos tributários e tendências de julgamentos no CARF, STJ e STF. E o Copilot Jurídico é um assistente nativo ativo em cada módulo da plataforma.</p>
+            <p><strong>Terceiro pilar: produto, não projeto.</strong><br>
+            O SIGMA não é mais um sistema interno. É uma plataforma com potencial de expansão comercial — outros escritórios, outras empresas, outros setores vão precisar do mesmo alicerce."</p>
+          </div>
+          <div class="cena">Exibe: mapa dos 9 módulos SIGMA — SIGMA.DATA em destaque na base</div>
+        </div>
+      </div>
+
+      <!-- BLOCO 4 -->
+      <div class="bloco" id="bloco4">
+        <div class="bloco-header">
+          <span class="bloco-timecode">5:30 – 7:00</span>
+          <span class="bloco-titulo">Bloco 4 — Aderência às Linhas Temáticas FINEP</span>
+        </div>
+        <div class="bloco-body">
+          <div class="narrador">Narrador: &lt;A Definir&gt;</div>
+          <div class="fala">
+            <p>"O SIGMA se enquadra em três das linhas temáticas desta chamada.</p>
+            <p>Na Linha 1.1, desenvolvemos uma plataforma nacional para operação e escala de sistemas de IA — com curadoria e governança de dados, aceleração de RAG, orquestração de múltiplos modelos e monitoramento de qualidade dos agentes de IA.</p>
+            <p>Na Linha 1.2, construímos o software de sistema que sustenta a pilha de IA — bases vetoriais, frameworks de inferência, ferramentas de auditabilidade e explicabilidade dos modelos.</p>
+            <p>Na Linha 2, o modelo de expansão da plataforma como serviço — PaaS — que permite licenciar a inteligência acumulada para outros players do mercado jurídico-tributário.</p>
+            <p>Ao longo dos 36 meses do projeto, partiremos do TRL 3 — onde já estamos, com provas de conceito funcionais em produção — e atingiremos o TRL 8, com sistema qualificado, finalizado e em operação comercial."</p>
+          </div>
+          <div class="cena">Exibe: escada TRL 3→8 com marcação de posição atual</div>
+        </div>
+      </div>
+
+      <!-- BLOCO 5 -->
+      <div class="bloco" id="bloco5">
+        <div class="bloco-header">
+          <span class="bloco-timecode">7:00 – 8:30</span>
+          <span class="bloco-titulo">Bloco 5 — Capacidade Técnica e Infraestrutura</span>
+        </div>
+        <div class="bloco-body">
+          <div class="narrador">Narrador: &lt;A Definir&gt;</div>
+          <div class="fala">
+            <p>"A InMinds Technology é uma empresa brasileira de tecnologia com foco em produtos SaaS B2B. Nossa equipe já opera com stack moderno — Nx monorepo, Fastify, Next.js, React Native, PostgreSQL com Prisma ORM, infraestrutura Azure — e entrega iterações semanais com metodologia ágil documentada.</p>
+            <p>Já temos demonstrações funcionais em produção: as calculadoras tributárias do SIGMA estão ao vivo no site da Machado Schutz hoje. Cada sprint do nosso desenvolvimento gera entregáveis documentados — exatamente o formato de comprovação que o FINEP exige.</p>
+            <p>Para a parceria ICT, contamos com a participação da USP e da UFSCar — esta já tem projetos ativos conosco — que vão atuar como parceiras técnico-científicas nas etapas de validação, prototipagem e transferência de tecnologia.</p>
+            <p>O arranjo é 100% nacional. InMinds brasileira. Machado Schutz brasileira. ICTs brasileiras. Stack open-source. Aderência total ao Plano Brasileiro de Inteligência Artificial 2025."</p>
+          </div>
+          <div class="cena">Exibe: logos InMinds + Machado Schutz + USP/UFSCar — timeline de entregas</div>
+        </div>
+      </div>
+
+      <!-- BLOCO 6 -->
+      <div class="bloco" id="bloco6">
+        <div class="bloco-header">
+          <span class="bloco-timecode">8:30 – 10:00</span>
+          <span class="bloco-titulo">Bloco 6 — Fechamento e Visão de Futuro</span>
+        </div>
+        <div class="bloco-body">
+          <div class="narrador">Narrador: Yuri Sanchez — Diretor Executivo Machado Schutz</div>
+          <div class="fala">
+            <p>"Durante décadas, o modelo de negócio do mercado tributário foi olhar para o passado: identificar o que o cliente pagou a mais, recuperar crédito, corrigir erros.</p>
+            <p>Esse modelo está mudando. A Reforma Tributária vai reduzir a assimetria que alimentava esse mercado. Em 5 anos, nossos clientes não vão mais precisar de alguém que recupere o que pagaram errado — vão precisar de alguém que garanta que eles nunca paguem errado.</p>
+            <p>O SIGMA é nossa resposta para esse futuro. Com planejamento tributário contínuo, monitoramento de eficiência fiscal em tempo real, advisory estratégico baseado em dados e uma base de inteligência tributária que nenhum concorrente tem condições de replicar.</p>
+            <p>Não estamos construindo uma solução para o problema de hoje. Estamos construindo a plataforma que vai definir como o mercado jurídico-tributário opera nos próximos 10 anos.</p>
+            <p>Plataforma SIGMA. Inteligência jurídica para o Brasil do futuro."</p>
+          </div>
+          <div class="cena">Exibe: slide final — Σ em verde, tagline, logos</div>
+        </div>
+      </div>
+
+    </div><!-- /parte-body -->
+  </div><!-- /parte1 -->
+
+  <!-- ══════════════════════════════════════════
+       PARTE 2 — VISÃO FUTURA
+  ═══════════════════════════════════════════ -->
+  <div id="parte2">
+    <div class="parte-header">
+      <div class="parte-num">Parte 2</div>
+      <h2>Seção "Visão Futura" da Proposta FINEP</h2>
+      <p>Para inserir na seção de descrição do projeto / resultados esperados</p>
+    </div>
+    <div class="parte-body">
+
+      <div class="secao" id="s51">
+        <h3>5.1 O Contexto de Transformação do Mercado</h3>
+        <p>O mercado jurídico-tributário brasileiro está em um ponto de inflexão histórico. A Reforma Tributária em curso, com a implantação do IVA dual (CBS e IBS), representa a maior transformação do sistema fiscal brasileiro desde a Constituição de 1988. Essa transformação não elimina a demanda por serviços tributários — ela a reconfigura fundamentalmente.</p>
+        <p>O modelo tradicional de atuação — baseado na identificação retroativa de créditos tributários recuperáveis e na exploração das assimetrias e ineficiências do sistema — terá sua relevância progressivamente reduzida à medida que o sistema se torna mais simples e uniforme. Em seu lugar, emergerá uma nova demanda: inteligência tributária contínua, planejamento fiscal preventivo e otimização permanente da carga tributária.</p>
+        <p>A Plataforma SIGMA foi concebida exatamente para esse cenário. Não como uma resposta ao problema atual, mas como a fundação tecnológica que posiciona a Machado Schutz Advogados para liderar o mercado jurídico-tributário da próxima década.</p>
+      </div>
+
+      <div class="secao" id="s52">
+        <h3>5.2 O Ativo Estratégico: 18 Anos de Dados Proprietários</h3>
+        <p>A Machado Schutz Advogados acumula quase duas décadas de dados sobre o comportamento tributário e fiscal de centenas de empresas brasileiras de diferentes setores, portes e regiões. Esse patrimônio — hoje fragmentado em planilhas e sistemas legados — é o ativo diferencial que nenhum competidor pode replicar.</p>
+        <p>O SIGMA.DATA (Alicerce de Dados) transforma esse patrimônio latente em inteligência ativa. Os modelos de IA treinados sobre essa base histórica proprietária produzirão insights, predições e recomendações com um grau de especialização e precisão que nenhuma solução de mercado genérica consegue oferecer.</p>
+        <div class="destaque">
+          Esse é o <strong>moat competitivo</strong> do projeto: a combinação de dados proprietários únicos com infraestrutura de IA de ponta, construída sobre tecnologias nacionais, em conformidade com a LGPD.
+        </div>
+      </div>
+
+      <div class="secao" id="s53">
+        <h3>5.3 Os Produtos e Serviços do Futuro</h3>
+        <p>O desenvolvimento da Plataforma SIGMA habilita um novo portfólio de produtos e serviços que a Machado Schutz poderá oferecer ao mercado ao longo do período de execução e nos anos subsequentes:</p>
+
+        <h4>a) Planejamento Tributário Contínuo</h4>
+        <p>Substituição do diagnóstico retroativo pontual por um modelo de monitoramento permanente da eficiência tributária do cliente. Simulação de cenários com as novas alíquotas IBS e CBS, identificação proativa de riscos e oportunidades, e recomendações automáticas geradas pelo SIGMA.IA.</p>
+
+        <h4>b) Monitoramento de Eficiência Fiscal com Indicadores Recorrentes</h4>
+        <p>Dashboard de inteligência tributária atualizado em tempo real, com KPIs definidos por setor e porte de empresa, alertas automáticos sobre mudanças legislativas relevantes e relatórios de eficiência comparativa (benchmarking setorial).</p>
+
+        <h4>c) Advisory Estratégico de Impacto Tributário</h4>
+        <p>Análise de impacto tributário em decisões estratégicas de negócio: expansão geográfica, reestruturação societária, precificação de produtos e serviços, fusões e aquisições. Serviço consultivo de alto valor, suportado por modelos preditivos do SIGMA.IA.</p>
+
+        <h4>d) Data Analytics Tributário — Plataforma como Serviço</h4>
+        <p>No horizonte do go-to-market SaaS (Fase 3, meses 25–36), a base de inteligência acumulada pelo SIGMA poderá ser licenciada para outros escritórios de advocacia, departamentos jurídicos corporativos e contabilidades. O modelo de negócio segue o formato de plataforma como serviço (PaaS), com acesso por assinatura a consultas, relatórios e análises geradas pela IA sobre a base de dados tributários consolidada.</p>
+      </div>
+
+      <div class="secao" id="s54">
+        <h3>5.4 Impacto Setorial e Relevância Nacional</h3>
+        <p>O setor jurídico-tributário brasileiro emprega mais de 1,2 milhão de profissionais e movimenta dezenas de bilhões de reais em honorários anuais. A grande maioria dos escritórios de pequeno e médio porte opera sem nenhuma infraestrutura de dados ou IA — exatamente o mercado endereçável pelo SIGMA em sua fase de expansão SaaS.</p>
+        <p>O desenvolvimento de uma plataforma de IA jurídica 100% nacional, em português brasileiro, com dados e modelos específicos para o complexo sistema tributário nacional, atende diretamente às prioridades do Plano Brasileiro de Inteligência Artificial (PBIA 2025) e à missão de transformação digital do Programa Mais Inovação Brasil.</p>
+      </div>
+
+      <div class="secao" id="s55">
+        <h3>5.5 Modelo de Negócio e Sustentabilidade</h3>
+        <p>A estrutura de receita do SIGMA evolui em três camadas ao longo dos 36 meses:</p>
+        <table>
+          <thead>
+            <tr><th>Fase</th><th>Modelo</th><th>Receita</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1–12 meses</strong></td>
+              <td>Produto interno — redução de custos operacionais e aumento de produtividade</td>
+              <td>Indireta (eficiência)</td>
+            </tr>
+            <tr>
+              <td><strong>13–24 meses</strong></td>
+              <td>Primeiros contratos consultivos com os novos produtos (itens 5.3a e 5.3b)</td>
+              <td>Direta recorrente</td>
+            </tr>
+            <tr>
+              <td><strong>25–36 meses</strong></td>
+              <td>Expansão SaaS — licenciamento da plataforma para o mercado</td>
+              <td>Escalável</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Essa estrutura garante sustentabilidade financeira do projeto além do período de subvenção, com geração de receita crescente que independe dos recursos FINEP a partir do segundo ano.</p>
+      </div>
+
+    </div><!-- /parte-body -->
+  </div><!-- /parte2 -->
+</div><!-- /container -->
+
+<footer>
+  <strong>Machado Schutz Advogados</strong> + <strong>InMinds Technology</strong><br>
+  Proposta FINEP Mais Inovação Brasil — Rodada 2 · Tecnologias Digitais · 2026<br>
+  <span style="font-size:0.7rem;opacity:0.6">Plataforma SIGMA — Sistema Integrado de Gestão Machado Schutz · Confidencial</span>
+</footer>
+
+</body>
+</html>
