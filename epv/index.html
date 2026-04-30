@@ -1,578 +1,564 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grupo EPAVI · Análise Preliminar FINEP · InMinds Technology</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #FAFAF6;
-    --surface: #FFFFFF;
-    --ink: #161614;
-    --ink-soft: #3D3D3A;
-    --muted: #6B6B66;
-    --hairline: #E5E3DC;
-    --hairline-strong: #C9C6BC;
-    --rust: #A03722;
-    --rust-soft: #F4E8E4;
-    --amber: #8E5C0A;
-    --amber-soft: #F5EBD8;
-    --sage: #3F5C44;
-    --sage-soft: #E5ECDF;
-    --neutral-soft: #EFEDE5;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-
-  body {
-    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    font-size: 15px;
-    line-height: 1.6;
-    font-feature-settings: 'ss01', 'cv01';
-  }
-
-  .page {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 64px 56px 56px;
-  }
-
-  /* ========== HEADER ========== */
-  .masthead {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--ink);
-    margin-bottom: 56px;
-  }
-
-  .brand {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink);
-    font-weight: 500;
-  }
-
-  .brand .dot {
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    background: var(--rust);
-    border-radius: 50%;
-    vertical-align: middle;
-    margin: 0 8px 2px;
-  }
-
-  .meta {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.05em;
-    color: var(--muted);
-    text-align: right;
-    line-height: 1.7;
-  }
-
-  .meta strong {
-    color: var(--ink);
-    font-weight: 500;
-  }
-
-  /* ========== TITLE BLOCK ========== */
-  .title-block {
-    margin-bottom: 80px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 48px;
-    align-items: end;
-  }
-
-  .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--rust);
-    margin-bottom: 20px;
-    font-weight: 500;
-  }
-
-  h1 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 76px;
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    font-weight: 400;
-    color: var(--ink);
-    margin-bottom: 16px;
-  }
-
-  h1 em {
-    font-style: italic;
-    color: var(--rust);
-  }
-
-  .subtitle {
-    font-size: 16px;
-    color: var(--ink-soft);
-    max-width: 580px;
-    line-height: 1.55;
-  }
-
-  .status-stamp {
-    border: 1px solid var(--rust);
-    padding: 14px 18px;
-    text-align: right;
-    background: var(--rust-soft);
-    min-width: 220px;
-  }
-
-  .status-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--rust);
-    margin-bottom: 4px;
-    font-weight: 500;
-  }
-
-  .status-text {
-    font-family: 'Instrument Serif', serif;
-    font-size: 19px;
-    line-height: 1.2;
-    color: var(--rust);
-    font-style: italic;
-  }
-
-  /* ========== SECTIONS ========== */
-  section {
-    margin-bottom: 80px;
-  }
-
-  .section-head {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 32px;
-    margin-bottom: 36px;
-    align-items: baseline;
-    padding-top: 24px;
-    border-top: 1px solid var(--hairline);
-  }
-
-  .section-num {
-    font-family: 'Instrument Serif', serif;
-    font-size: 56px;
-    font-style: italic;
-    color: var(--rust);
-    font-weight: 400;
-    line-height: 1;
-  }
-
-  .section-title {
-    font-family: 'Instrument Serif', serif;
-    font-size: 32px;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-    font-weight: 400;
-    color: var(--ink);
-    margin-bottom: 8px;
-  }
-
-  .section-lede {
-    font-size: 15px;
-    color: var(--muted);
-    max-width: 720px;
-    line-height: 1.6;
-  }
-
-  /* ========== ALERTS GRID ========== */
-  .alerts-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--hairline);
-    border: 1px solid var(--hairline);
-  }
-
-  .alert-card {
-    background: var(--surface);
-    padding: 28px 28px 32px;
-    position: relative;
-    transition: background 0.2s ease;
-  }
-
-  .alert-card:hover {
-    background: #FCFBF7;
-  }
-
-  .alert-card.critical::before {
-    content: '';
-    position: absolute;
-    top: 28px;
-    left: 0;
-    width: 4px;
-    height: 22px;
-    background: var(--rust);
-  }
-
-  .alert-card.warning::before {
-    content: '';
-    position: absolute;
-    top: 28px;
-    left: 0;
-    width: 4px;
-    height: 22px;
-    background: var(--amber);
-  }
-
-  .alert-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-    font-weight: 500;
-  }
-
-  .alert-card.critical .alert-num { color: var(--rust); }
-  .alert-card.warning .alert-num { color: var(--amber); }
-
-  .alert-title {
-    font-family: 'Instrument Serif', serif;
-    font-size: 24px;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 12px;
-    font-weight: 400;
-  }
-
-  .alert-body {
-    font-size: 14.5px;
-    line-height: 1.6;
-    color: var(--ink-soft);
-  }
-
-  /* ========== QUESTIONS ========== */
-  .questions {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    border-top: 1px solid var(--hairline);
-  }
-
-  .question {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 32px;
-    padding: 28px 0;
-    border-bottom: 1px solid var(--hairline);
-    align-items: baseline;
-  }
-
-  .question-num {
-    font-family: 'Instrument Serif', serif;
-    font-size: 44px;
-    font-style: italic;
-    color: var(--ink);
-    font-weight: 400;
-    line-height: 1;
-    opacity: 0.85;
-  }
-
-  .question-content h3 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 26px;
-    line-height: 1.2;
-    letter-spacing: -0.005em;
-    color: var(--ink);
-    margin-bottom: 8px;
-    font-weight: 400;
-  }
-
-  .question-content p {
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--muted);
-    max-width: 760px;
-  }
-
-  /* ========== PATHS ========== */
-  .paths-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
-  .path-card {
-    border: 1px solid var(--hairline-strong);
-    padding: 28px 24px 32px;
-    background: var(--surface);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .path-card.recommended { border: 1px solid var(--sage); background: var(--sage-soft); }
-  .path-card.adjust { border: 1px solid var(--amber); background: var(--amber-soft); }
-  .path-card.stop { border: 1px solid var(--hairline-strong); background: var(--neutral-soft); }
-
-  .path-letter {
-    font-family: 'Instrument Serif', serif;
-    font-size: 64px;
-    font-style: italic;
-    line-height: 0.9;
-    margin-bottom: 16px;
-    font-weight: 400;
-  }
-
-  .path-card.recommended .path-letter { color: var(--sage); }
-  .path-card.adjust .path-letter { color: var(--amber); }
-  .path-card.stop .path-letter { color: var(--ink-soft); }
-
-  .path-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 8px;
-    font-weight: 500;
-  }
-
-  .path-name {
-    font-family: 'Instrument Serif', serif;
-    font-size: 22px;
-    line-height: 1.2;
-    color: var(--ink);
-    margin-bottom: 12px;
-    font-weight: 400;
-  }
-
-  .path-body {
-    font-size: 13.5px;
-    line-height: 1.6;
-    color: var(--ink-soft);
-  }
-
-  /* ========== FOOTER ========== */
-  footer {
-    margin-top: 80px;
-    padding-top: 24px;
-    border-top: 1px solid var(--ink);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  footer strong {
-    color: var(--ink);
-    font-weight: 500;
-  }
-
-  /* ========== ANIMATION ========== */
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal {
-      opacity: 0;
-      transform: translateY(12px);
-      animation: reveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grupo EPAVI · Projeto FINEP · IA para CFTV Legado</title>
+  <meta name="description" content="Hub de materiais técnicos do Grupo EPAVI para o edital FINEP Mais Inovação Brasil 2026 — análise, diagnóstico e plano de submissão por InMinds Technology">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:          #061128;
+      --navy:        #0E2A5C;
+      --navy-mid:    #0A1F44;
+      --navy-deep:   #04081C;
+      --gold:        #F5B81E;
+      --gold-dim:    rgba(245,184,30,.45);
+      --gold-faint:  rgba(245,184,30,.07);
+      --text:        #EEF2F8;
+      --text-muted:  rgba(238,242,248,.5);
+      --border:      rgba(245,184,30,.11);
+      --border-on:   rgba(245,184,30,.36);
+      --radius:      2px;
+      --ff-display:  'Manrope', system-ui, sans-serif;
+      --ff-body:     'Manrope', system-ui, sans-serif;
+      --ff-mono:     'JetBrains Mono', monospace;
     }
-    .reveal:nth-child(1) { animation-delay: 0.05s; }
-    .reveal:nth-child(2) { animation-delay: 0.15s; }
-    .reveal:nth-child(3) { animation-delay: 0.25s; }
-    .reveal:nth-child(4) { animation-delay: 0.35s; }
-  }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
-  @keyframes reveal {
-    to { opacity: 1; transform: translateY(0); }
-  }
+    body {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 70% 55% at 15% 25%,  rgba(14,42,92,.55) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 45% at 88% 78%,  rgba(245,184,30,.05) 0%, transparent 55%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      background-size: cover, cover, 300px 300px;
+      color: var(--text);
+      font-family: var(--ff-body);
+      font-weight: 400;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-  /* ========== RESPONSIVE ========== */
-  @media (max-width: 880px) {
-    .page { padding: 36px 24px; }
-    h1 { font-size: 48px; }
-    .title-block { grid-template-columns: 1fr; gap: 24px; }
-    .alerts-grid { grid-template-columns: 1fr; }
-    .paths-grid { grid-template-columns: 1fr; }
-    .section-head { grid-template-columns: 56px 1fr; gap: 16px; }
-    .section-num { font-size: 40px; }
-    .section-title { font-size: 24px; }
-    .question { grid-template-columns: 56px 1fr; gap: 16px; }
-    .question-num { font-size: 32px; }
-    .question-content h3 { font-size: 20px; }
-    .alert-title { font-size: 20px; }
-  }
+    /* ───── NAV ───────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 48px;
+      background: rgba(6,17,40,.88);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .brand-mark {
+      width: 28px; height: 28px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .brand-mark::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--gold); border-radius: 50%;
+    }
+    .brand-mark::after {
+      content: ''; position: absolute; inset: -4px;
+      border: 1px solid rgba(245,184,30,.25);
+      border-radius: 50%;
+      animation: ring 3s ease-in-out infinite;
+    }
+    @keyframes ring {
+      0%, 100% { transform: scale(1); opacity: .25; }
+      50% { transform: scale(1.18); opacity: 0; }
+    }
+    .brand-rule { width: 1px; height: 22px; background: var(--border-on); }
+    .brand-name {
+      font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .brand-name span { color: var(--gold-dim); font-weight: 500; }
+    .search-wrap { position: relative; width: 268px; }
+    .search-wrap svg {
+      position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+      width: 13px; height: 13px; color: var(--gold-dim); pointer-events: none;
+    }
+    #search {
+      width: 100%; padding: 9px 16px 9px 36px;
+      background: var(--gold-faint); border: 1px solid var(--border);
+      border-radius: var(--radius); color: var(--text);
+      font-family: var(--ff-body); font-size: 12.5px; font-weight: 400;
+      letter-spacing: .4px; outline: none;
+      transition: border-color .2s, background .2s;
+    }
+    #search::placeholder { color: var(--text-muted); }
+    #search:focus { border-color: var(--border-on); background: rgba(245,184,30,.10); }
 
-  /* ========== PRINT ========== */
-  @media print {
-    body { background: white; font-size: 11pt; }
-    .page { max-width: 100%; padding: 16mm; }
-    section { page-break-inside: avoid; margin-bottom: 32px; }
-    h1 { font-size: 42pt; }
-    .alert-card:hover { background: var(--surface); }
-    @page { size: A4; margin: 0; }
-  }
-</style>
+    /* ───── HERO ──────────────────────────────────────── */
+    .hero {
+      max-width: 1200px; margin: 0 auto;
+      padding: 72px 48px 40px;
+      display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end;
+      animation: fadeUp .9s ease both;
+    }
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 10.5px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 18px; font-weight: 600;
+    }
+    .hero-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
+    .hero-title {
+      font-family: var(--ff-display);
+      font-size: clamp(48px, 7vw, 92px);
+      font-weight: 800; line-height: .94; letter-spacing: -2.5px; color: var(--text);
+    }
+    .hero-title .accent { color: var(--gold); font-weight: 800; }
+    .hero-title .small {
+      display: block; font-size: .42em; font-weight: 400;
+      letter-spacing: -.5px; color: var(--text-muted); margin-top: 14px;
+    }
+    .hero-sub {
+      margin-top: 24px; font-size: 14px; font-weight: 400;
+      color: var(--text-muted); line-height: 1.75; max-width: 470px; letter-spacing: .2px;
+    }
+    .hero-aside { text-align: right; }
+    .aside-label {
+      font-size: 10px; letter-spacing: 2.2px; text-transform: uppercase;
+      color: var(--gold-dim); margin-bottom: 6px; font-weight: 600;
+    }
+    .aside-value { font-family: var(--ff-display); font-size: 17px; color: var(--gold); font-weight: 600; }
+    .aside-trl {
+      margin-top: 14px; font-size: 10px; letter-spacing: 1.8px;
+      text-transform: uppercase; color: var(--text-muted); font-family: var(--ff-mono);
+    }
+    .hero-divider {
+      height: 1px; max-width: 1200px; margin: 0 auto 40px;
+      background: linear-gradient(90deg, rgba(245,184,30,.5) 0%, rgba(245,184,30,.08) 55%, transparent 100%);
+      animation: fadeUp .9s .08s ease both;
+    }
+
+    /* ───── FILTERS ───────────────────────────────────── */
+    .filters {
+      max-width: 1200px; margin: 0 auto; padding: 0 48px 28px;
+      display: flex; align-items: center; gap: 7px; flex-wrap: wrap;
+      animation: fadeUp .9s .15s ease both;
+    }
+    .filter-lbl {
+      font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--text-muted); margin-right: 6px; font-weight: 600;
+    }
+    .f-btn {
+      padding: 5px 15px; border: 1px solid var(--border); border-radius: var(--radius);
+      background: transparent; color: var(--text-muted);
+      font-family: var(--ff-body); font-size: 10.5px; letter-spacing: 1.8px;
+      text-transform: uppercase; cursor: pointer; transition: all .2s; font-weight: 600;
+    }
+    .f-btn:hover { border-color: var(--border-on); color: var(--gold); }
+    .f-btn.on { border-color: var(--border-on); color: var(--gold); background: var(--gold-faint); }
+
+    /* ───── GRID ──────────────────────────────────────── */
+    .grid {
+      max-width: 1200px; margin: 0 auto; padding: 0 48px 80px;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      animation: fadeUp .9s .22s ease both;
+    }
+
+    .card {
+      background: var(--bg); padding: 36px 40px;
+      position: relative; overflow: hidden;
+      text-decoration: none; color: inherit; display: block;
+      cursor: pointer; transition: background .25s;
+    }
+    .card:hover { background: rgba(14,42,92,.4); }
+    .card.upcoming { cursor: default; opacity: .68; }
+    .card.upcoming:hover { background: var(--bg); }
+
+    /* left accent line */
+    .card::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background: transparent; transition: background .25s;
+    }
+    .card:hover:not(.upcoming)::before { background: var(--gold); }
+
+    /* glow on hover */
+    .card::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+      background: radial-gradient(ellipse 55% 70% at 50% 50%, rgba(245,184,30,.04) 0%, transparent 70%);
+      transition: opacity .4s;
+    }
+    .card:hover:not(.upcoming)::after { opacity: 1; }
+
+    /* featured spans all 3 cols */
+    .card-feat { grid-column: 1 / -1; }
+
+    .card-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .card-tag {
+      font-size: 9.5px; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--gold); border: 1px solid rgba(245,184,30,.28);
+      padding: 4px 11px; border-radius: 1px; font-weight: 600;
+    }
+    .card-tag.upcoming-tag {
+      color: var(--text-muted); border-color: rgba(238,242,248,.18);
+    }
+    .card-num { font-family: var(--ff-mono); font-size: 11px; color: var(--text-muted); letter-spacing: 1.5px; }
+
+    /* ── FEATURED LAYOUT ── */
+    .feat-body { display: grid; grid-template-columns: 1fr 400px; gap: 48px; align-items: center; }
+
+    .card-title {
+      font-family: var(--ff-display);
+      font-size: clamp(28px, 3.4vw, 44px);
+      font-weight: 700; line-height: 1.05; letter-spacing: -1px; color: var(--text);
+      margin-bottom: 14px;
+    }
+    .card-desc {
+      font-size: 13.5px; font-weight: 400; color: var(--text-muted);
+      line-height: 1.75; letter-spacing: .15px; margin-bottom: 24px;
+    }
+    .card-meta {
+      display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+      font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gold-dim); font-weight: 600;
+    }
+    .meta-item { display: flex; align-items: center; gap: 5px; }
+    .meta-item svg { width: 11px; height: 11px; }
+    .card-cta {
+      display: inline-flex; align-items: center; gap: 9px;
+      margin-top: 24px; font-family: var(--ff-body); font-size: 11px;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--gold);
+      text-decoration: none; border-bottom: 1px solid rgba(245,184,30,.28);
+      padding-bottom: 2px; transition: border-color .2s; font-weight: 600;
+    }
+    .card-cta:hover { border-color: var(--gold); }
+    .card-cta svg { width: 13px; height: 13px; transition: transform .2s; }
+    .card:hover .card-cta svg { transform: translateX(4px); }
+    .card-cta.disabled {
+      color: var(--text-muted); border-bottom-color: rgba(238,242,248,.15);
+      pointer-events: none;
+    }
+
+    /* document preview (replaces machado's video preview) */
+    .preview {
+      position: relative; aspect-ratio: 16/9;
+      border-radius: var(--radius); overflow: hidden;
+      background: var(--navy-mid); display: flex; align-items: center; justify-content: center;
+    }
+    .preview-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 55%, #1B3D7A 100%);
+    }
+    /* radar pulse decoration */
+    .radar {
+      position: absolute; inset: 0; z-index: 1;
+      display: flex; align-items: center; justify-content: center;
+      opacity: .4;
+    }
+    .radar-ring {
+      position: absolute; border: 1px solid var(--gold);
+      border-radius: 50%; opacity: 0;
+      animation: radar-pulse 3s ease-out infinite;
+    }
+    .radar-ring:nth-child(1) { width: 120px; height: 120px; animation-delay: 0s; }
+    .radar-ring:nth-child(2) { width: 120px; height: 120px; animation-delay: 1s; }
+    .radar-ring:nth-child(3) { width: 120px; height: 120px; animation-delay: 2s; }
+    @keyframes radar-pulse {
+      0% { transform: scale(.4); opacity: 0; }
+      40% { opacity: .55; }
+      100% { transform: scale(2.4); opacity: 0; }
+    }
+    .preview-mark {
+      position: absolute; z-index: 2;
+      font-family: var(--ff-display); font-size: 96px; font-weight: 800;
+      color: rgba(245,184,30,.18); letter-spacing: -3px; line-height: 1;
+    }
+    .preview-cta {
+      position: absolute; inset: 0; z-index: 3;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .25s;
+    }
+    .preview-cta:hover { background: rgba(0,0,0,.18); }
+    .open-ring {
+      width: 56px; height: 56px; border-radius: 50%;
+      border: 1.5px solid rgba(245,184,30,.55);
+      background: rgba(0,0,0,.38); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      transition: all .28s;
+    }
+    .preview-cta:hover .open-ring {
+      border-color: var(--gold); background: rgba(245,184,30,.12);
+      transform: scale(1.1);
+    }
+    .open-ring svg { width: 16px; height: 16px; color: var(--gold); }
+
+    /* ── SMALL CARD LAYOUT ── */
+    .card-sm .card-title { font-size: clamp(20px, 2.1vw, 28px); }
+    .card-icon {
+      width: 44px; height: 44px; border: 1px solid var(--border); border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 22px; transition: border-color .25s;
+    }
+    .card:hover:not(.upcoming) .card-icon { border-color: var(--border-on); }
+    .card-icon svg { width: 18px; height: 18px; color: var(--gold); }
+    .card.upcoming .card-icon svg { color: var(--text-muted); }
+
+    /* upcoming badge inside small cards */
+    .upcoming-status {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--ff-mono); font-size: 10px; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-top: 22px; padding: 5px 10px;
+      border: 1px dashed rgba(238,242,248,.22); border-radius: var(--radius);
+      font-weight: 500;
+    }
+    .upcoming-status::before {
+      content: ''; width: 5px; height: 5px;
+      background: var(--text-muted); border-radius: 50%;
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty {
+      display: none; grid-column: 1/-1;
+      padding: 80px 40px; text-align: center;
+    }
+    .empty.show { display: block; }
+    .empty p { font-family: var(--ff-display); font-size: 22px; font-weight: 300; color: var(--text-muted); }
+
+    /* ───── FOOTER ────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      max-width: 1200px; margin: 0 auto; padding: 28px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .foot-l { font-size: 11.5px; letter-spacing: .4px; color: var(--text-muted); line-height: 1.6; }
+    .foot-l strong { color: var(--text); font-weight: 600; }
+    .foot-r {
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold-dim); font-weight: 600;
+    }
+
+    /* ───── ANIMATIONS ────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ───── HIDDEN ────────────────────────────────────── */
+    .card.hide { display: none; }
+
+    /* ───── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 960px) {
+      nav { padding: 14px 22px; }
+      .search-wrap { width: 190px; }
+      .hero { padding: 48px 22px 32px; grid-template-columns: 1fr; }
+      .hero-aside { text-align: left; margin-top: 24px; }
+      .hero-divider { margin-left: 22px; margin-right: 22px; }
+      .filters { padding: 0 22px 24px; }
+      .grid { padding: 0 0 48px; grid-template-columns: 1fr; }
+      .card-feat { grid-column: 1; }
+      .feat-body { grid-template-columns: 1fr; }
+      .preview { order: -1; }
+      footer { padding: 24px 22px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-<div class="page">
 
-  <!-- MASTHEAD -->
-  <header class="masthead">
-    <div class="brand">InMinds Technology<span class="dot"></span>Análise FINEP</div>
-    <div class="meta">
-      Documento <strong>INM-FNP-2026-007</strong><br>
-      Uso interno · circulação restrita
-    </div>
-  </header>
+<!-- NAV -->
+<nav>
+  <a class="brand" href="#">
+    <span class="brand-mark"></span>
+    <div class="brand-rule"></div>
+    <span class="brand-name">EPAVI <span>· FINEP 2026</span></span>
+  </a>
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input id="search" type="text" placeholder="Buscar materiais…" autocomplete="off">
+  </div>
+</nav>
 
-  <!-- TITLE -->
-  <section class="title-block reveal">
-    <div>
-      <div class="eyebrow">Análise Preliminar · Cliente</div>
-      <h1>Grupo EPAVI<br><em>projeto IA para CFTV</em></h1>
-      <p class="subtitle">Avaliação de aderência ao edital Mais Inovação Brasil — Rodada 2 (Tecnologias Digitais), publicado em 12 de março de 2026.</p>
-    </div>
-    <div class="status-stamp">
-      <div class="status-label">Status</div>
-      <div class="status-text">Ajustes estruturais necessários antes de submeter</div>
-    </div>
-  </section>
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">Análise técnica · Edital FINEP</div>
+    <h1 class="hero-title">Projeto IA<br><span class="accent">CFTV Inteligente</span><span class="small">Hub de materiais técnicos · Grupo EPAVI</span></h1>
+    <p class="hero-sub">Materiais do projeto de aplicação de Inteligência Artificial sobre infraestrutura de CFTV legado para o edital Mais Inovação Brasil — Rodada 2 · Tecnologias Digitais. Análise preparada por InMinds Technology.</p>
+  </div>
+  <div class="hero-aside">
+    <div class="aside-label">Status atual</div>
+    <div class="aside-value">Pré-Diagnóstico</div>
+    <div class="aside-trl" style="margin-top:18px">Reunião · Calibragem 2026</div>
+    <div class="aside-trl" style="margin-top:4px">Edital · Mais Inovação Brasil R2</div>
+    <div class="aside-trl" style="margin-top:4px">Submissão · Setembro 2026</div>
+  </div>
+</section>
+<div class="hero-divider"></div>
 
-  <!-- ALERTS -->
-  <section class="reveal">
-    <div class="section-head">
-      <div class="section-num">01</div>
-      <div>
-        <h2 class="section-title">Quatro alertas críticos identificados no briefing</h2>
-        <p class="section-lede">Cada um dos pontos a seguir é, isoladamente, capaz de eliminar a proposta na fase de habilitação ou na análise de mérito. Os três primeiros constituem eliminatórios automáticos do edital.</p>
-      </div>
-    </div>
-
-    <div class="alerts-grid">
-
-      <div class="alert-card critical">
-        <div class="alert-num">Alerta 01 · Crítico</div>
-        <h3 class="alert-title">Tropicalização vedada</h3>
-        <p class="alert-body">Servidores Hikvision e licenças HikCentral são produtos estrangeiros maduros. O edital veda explicitamente "tropicalização de solução já utilizada por matriz estrangeira" — encaixe direto e indefensável na proibição.</p>
-      </div>
-
-      <div class="alert-card critical">
-        <div class="alert-num">Alerta 02 · Eliminatório</div>
-        <h3 class="alert-title">Ineditismo zero</h3>
-        <p class="alert-body">Reconhecimento facial, heatmap e contagem de pessoas são tecnologias comerciais maduras há mais de uma década. Os indicadores Abrangência e Incerteza Tecnológica recebem nota zero — reprovação automática na bancada.</p>
-      </div>
-
-      <div class="alert-card critical">
-        <div class="alert-num">Alerta 03 · Crítico</div>
-        <h3 class="alert-title">TRL de entrada incompatível</h3>
-        <p class="alert-body">O edital exige TRL 3 a 6 na entrada. Os componentes Hikvision já estão em TRL 9 — produto comercial em produção mundial. Não há gap tecnológico legítimo a ser desenvolvido durante a vigência do projeto.</p>
-      </div>
-
-      <div class="alert-card warning">
-        <div class="alert-num">Alerta 04 · Atenção</div>
-        <h3 class="alert-title">Equipe sem perfil de P&amp;D</h3>
-        <p class="alert-body">O briefing cita gestor, engenheiro elétrico, implantadores e digitadores. Falta perfil acadêmico — mestres ou doutores — e não há ICT parceira mencionada, exigência obrigatória em todo arranjo FINEP.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- QUESTIONS -->
-  <section class="reveal">
-    <div class="section-head">
-      <div class="section-num">02</div>
-      <div>
-        <h2 class="section-title">Três perguntas-chave para a reunião</h2>
-        <p class="section-lede">As respostas às perguntas abaixo determinam, com clareza operacional, se o projeto pode ser reposicionado, se precisa ser adiado para uma próxima rodada ou se simplesmente não deve ser submetido a este edital.</p>
-      </div>
-    </div>
-
-    <div class="questions">
-
-      <div class="question">
-        <div class="question-num"><em>i</em></div>
-        <div class="question-content">
-          <h3>O que vocês desenvolvem de proprietário hoje?</h3>
-          <p>Existe algoritmo, plataforma, API ou camada de orquestração que será codada pela equipe EPAVI e ficará como ativo da empresa — não da Hikvision? Esta é a pergunta que decide se há ou não um projeto de inovação real a ser financiado.</p>
-        </div>
-      </div>
-
-      <div class="question">
-        <div class="question-num"><em>ii</em></div>
-        <div class="question-content">
-          <h3>Qual a saúde financeira atual do EPAVI?</h3>
-          <p>Faturamento anual, patrimônio líquido positivo e resultado operacional do último exercício. A capacidade financeira é eliminatória já na fase de habilitação — antes mesmo da bancada de mérito olhar o conteúdo técnico.</p>
-        </div>
-      </div>
-
-      <div class="question">
-        <div class="question-num"><em>iii</em></div>
-        <div class="question-content">
-          <h3>ICT parceira, equipe acadêmica e modelo de produto?</h3>
-          <p>Há ICT em vista? A equipe inclui mestres ou doutores, ou existe disposição para contratá-los? E o produto resultante vira SaaS para outros clientes do mercado, ou é exclusivo do banco-cliente?</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- PATHS -->
-  <section class="reveal">
-    <div class="section-head">
-      <div class="section-num">03</div>
-      <div>
-        <h2 class="section-title">Três caminhos possíveis após a reunião</h2>
-        <p class="section-lede">A decisão final depende inteiramente das respostas obtidas. Abaixo, a recomendação preliminar para cada cenário plausível.</p>
-      </div>
-    </div>
-
-    <div class="paths-grid">
-
-      <div class="path-card recommended">
-        <div class="path-letter">A</div>
-        <div class="path-label">Caminho A</div>
-        <h3 class="path-name">Reposicionar e seguir</h3>
-        <p class="path-body">Se há ativo proprietário e ambição SaaS no horizonte: reescrever a proposta como plataforma nacional de IA para CFTV legado, com EPAVI no papel de desenvolvedor e Hikvision rebaixada a uma das fontes de hardware integráveis.</p>
-      </div>
-
-      <div class="path-card adjust">
-        <div class="path-letter">B</div>
-        <div class="path-label">Caminho B</div>
-        <h3 class="path-name">Ajustar e adiar</h3>
-        <p class="path-body">Se faltam ICT parceira, equipe sênior ou saúde financeira mas o projeto tem potencial real: mapear gaps em detalhe, executar correções em janela de sessenta dias e voltar para uma rodada subsequente do edital.</p>
-      </div>
-
-      <div class="path-card stop">
-        <div class="path-letter">C</div>
-        <div class="path-label">Caminho C</div>
-        <h3 class="path-name">Não submeter</h3>
-        <p class="path-body">Se a operação for, de fato, revenda mais integração: economizar a energia investida e redirecionar para linhas de fomento mais aderentes — BNDES, Lei do Bem ou EMBRAPII —, melhor adaptadas ao perfil real do projeto.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div><strong>InMinds Technology</strong> · Consultoria FINEP 2026</div>
-    <div>Documento de discussão — não submeter ao edital</div>
-  </footer>
-
+<!-- FILTERS -->
+<div class="filters">
+  <span class="filter-lbl">Filtrar</span>
+  <button class="f-btn on"  data-f="todos">Todos</button>
+  <button class="f-btn"     data-f="analise">Análise</button>
+  <button class="f-btn"     data-f="reuniao">Reunião</button>
+  <button class="f-btn"     data-f="diagnostico">Diagnóstico</button>
+  <button class="f-btn"     data-f="plano">Plano</button>
 </div>
+
+<!-- GRID -->
+<main class="grid" id="grid">
+
+  <!-- 01 · ONE-PAGER (FEATURED) -->
+  <a class="card card-feat" href="pre-analise.html" data-tags="analise preliminar one-pager alertas tropicalização ineditismo trl equipe perguntas caminhos epavi finep">
+    <div class="card-head">
+      <span class="card-tag">Análise Preliminar</span>
+      <span class="card-num">01 · 04</span>
+    </div>
+    <div class="feat-body">
+      <div>
+        <h2 class="card-title">One-Pager<br>Análise Preliminar</h2>
+        <p class="card-desc">Avaliação técnica preliminar do projeto de IA aplicada ao parque legado de CFTV do Grupo EPAVI. Quatro alertas críticos identificados na leitura do briefing inicial, três perguntas-chave para a reunião de calibragem e três caminhos possíveis para encaminhamento — reposicionar, ajustar ou redirecionar para outra linha de fomento.</p>
+        <div class="card-meta">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            Leitura · 6 min
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M3.05 11a9 9 0 1 1 0 2"/></svg>
+            4 alertas · 3 caminhos
+          </span>
+          <span class="meta-item">HTML · A4-ready</span>
+        </div>
+        <span class="card-cta">
+          Abrir documento
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </div>
+      <div class="preview">
+        <div class="preview-bg"></div>
+        <div class="radar">
+          <div class="radar-ring"></div>
+          <div class="radar-ring"></div>
+          <div class="radar-ring"></div>
+        </div>
+        <span class="preview-mark">EPV</span>
+        <div class="preview-cta">
+          <div class="open-ring">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v7H3V3h7"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <!-- 02 · ROTEIRO DE REUNIÃO -->
+  <a class="card card-sm" href="roteiro-reuniao.html" data-tags="reuniao calibragem pauta agenda decision tree arvore decisao template notas perguntas">
+    <div class="card-head">
+      <span class="card-tag">Reunião</span>
+      <span class="card-num">02 · 04</span>
+    </div>
+    <div class="card-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+        <line x1="3" y1="10" x2="21" y2="10"/>
+      </svg>
+    </div>
+    <h2 class="card-title">Roteiro<br>de Reunião</h2>
+    <p class="card-desc">Pauta operacional de 30 minutos com decision tree em tempo real e template estruturado para captura das respostas-chave durante a conversa de calibragem com o EPAVI.</p>
+    <span class="card-cta">
+      Acessar
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </span>
+  </a>
+
+  <!-- 03 · DIAGNÓSTICO TÉCNICO (UPCOMING) -->
+  <div class="card card-sm upcoming" data-tags="diagnostico tecnico elegibilidade trl risco recomendacao ict linhas tematicas">
+    <div class="card-head">
+      <span class="card-tag upcoming-tag">Diagnóstico</span>
+      <span class="card-num">03 · 04</span>
+    </div>
+    <div class="card-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+    </div>
+    <h2 class="card-title">Diagnóstico<br>Técnico</h2>
+    <p class="card-desc">Análise completa de elegibilidade, enquadramento por linha temática, TRL atual e meta, riscos classificados (crítico, atenção, observação) e recomendação final com grau de certeza percentual.</p>
+    <span class="upcoming-status">Em produção · pós-reunião</span>
+  </div>
+
+  <!-- 04 · ROADMAP FINEP (UPCOMING) -->
+  <div class="card card-sm upcoming" data-tags="plano roadmap submissao orcamento cronograma video script narrativa moat estrategica caminho A">
+    <div class="card-head">
+      <span class="card-tag upcoming-tag">Plano</span>
+      <span class="card-num">04 · 04</span>
+    </div>
+    <div class="card-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 3h18v18H3z"/>
+        <path d="M3 9h18"/><path d="M9 21V9"/>
+      </svg>
+    </div>
+    <h2 class="card-title">Roadmap<br>FINEP</h2>
+    <p class="card-desc">Plano completo de submissão se o caminho recomendado for o de seguir adiante — defesa estratégica, narrativa, orçamento detalhado, cronograma de 36 meses e script do vídeo institucional de 10 minutos.</p>
+    <span class="upcoming-status">Em produção · pós-diagnóstico</span>
+  </div>
+
+  <!-- Empty state -->
+  <div class="empty" id="empty">
+    <p>Nenhum material encontrado para esta busca.</p>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-l">
+    © 2026 <strong>Grupo EPAVI</strong> · Projeto IA aplicada a CFTV legado<br>
+    Edital FINEP Mais Inovação Brasil · Rodada 2 · Tecnologias Digitais
+  </div>
+  <div class="foot-r">InMinds Technology</div>
+</footer>
+
+<script>
+  /* ── search + filter ── */
+  const $search  = document.getElementById('search');
+  const $cards   = document.querySelectorAll('.card');
+  const $empty   = document.getElementById('empty');
+  let   activeF  = 'todos';
+
+  function applyFilters() {
+    const q = $search.value.toLowerCase().trim();
+    let n = 0;
+    $cards.forEach(c => {
+      const tags = (c.dataset.tags || '').toLowerCase();
+      const text = c.innerText.toLowerCase();
+      const okSearch = !q || text.includes(q) || tags.includes(q);
+      const okFilter = activeF === 'todos' || tags.includes(activeF);
+      if (okSearch && okFilter) { c.classList.remove('hide'); n++; }
+      else                       { c.classList.add('hide'); }
+    });
+    $empty.classList.toggle('show', n === 0);
+  }
+
+  $search.addEventListener('input', applyFilters);
+
+  document.querySelectorAll('.f-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      activeF = btn.dataset.f;
+      applyFilters();
+    });
+  });
+</script>
 </body>
 </html>
