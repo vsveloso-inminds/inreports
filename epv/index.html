@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grupo EPAVI · Análise Preliminar FINEP · InMinds Technology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF6;
+    --surface: #FFFFFF;
+    --ink: #161614;
+    --ink-soft: #3D3D3A;
+    --muted: #6B6B66;
+    --hairline: #E5E3DC;
+    --hairline-strong: #C9C6BC;
+    --rust: #A03722;
+    --rust-soft: #F4E8E4;
+    --amber: #8E5C0A;
+    --amber-soft: #F5EBD8;
+    --sage: #3F5C44;
+    --sage-soft: #E5ECDF;
+    --neutral-soft: #EFEDE5;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+    font-feature-settings: 'ss01', 'cv01';
+  }
+
+  .page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 64px 56px 56px;
+  }
+
+  /* ========== HEADER ========== */
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 56px;
+  }
+
+  .brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .brand .dot {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--rust);
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 8px 2px;
+  }
+
+  .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.7;
+  }
+
+  .meta strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ========== TITLE BLOCK ========== */
+  .title-block {
+    margin-bottom: 80px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: end;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 76px;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .subtitle {
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 580px;
+    line-height: 1.55;
+  }
+
+  .status-stamp {
+    border: 1px solid var(--rust);
+    padding: 14px 18px;
+    text-align: right;
+    background: var(--rust-soft);
+    min-width: 220px;
+  }
+
+  .status-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  .status-text {
+    font-family: 'Instrument Serif', serif;
+    font-size: 19px;
+    line-height: 1.2;
+    color: var(--rust);
+    font-style: italic;
+  }
+
+  /* ========== SECTIONS ========== */
+  section {
+    margin-bottom: 80px;
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    margin-bottom: 36px;
+    align-items: baseline;
+    padding-top: 24px;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .section-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 56px;
+    font-style: italic;
+    color: var(--rust);
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .section-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .section-lede {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 720px;
+    line-height: 1.6;
+  }
+
+  /* ========== ALERTS GRID ========== */
+  .alerts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--hairline);
+    border: 1px solid var(--hairline);
+  }
+
+  .alert-card {
+    background: var(--surface);
+    padding: 28px 28px 32px;
+    position: relative;
+    transition: background 0.2s ease;
+  }
+
+  .alert-card:hover {
+    background: #FCFBF7;
+  }
+
+  .alert-card.critical::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 0;
+    width: 4px;
+    height: 22px;
+    background: var(--rust);
+  }
+
+  .alert-card.warning::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 0;
+    width: 4px;
+    height: 22px;
+    background: var(--amber);
+  }
+
+  .alert-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  .alert-card.critical .alert-num { color: var(--rust); }
+  .alert-card.warning .alert-num { color: var(--amber); }
+
+  .alert-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 24px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+
+  .alert-body {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  /* ========== QUESTIONS ========== */
+  .questions {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .question {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--hairline);
+    align-items: baseline;
+  }
+
+  .question-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 44px;
+    font-style: italic;
+    color: var(--ink);
+    font-weight: 400;
+    line-height: 1;
+    opacity: 0.85;
+  }
+
+  .question-content h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 26px;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+
+  .question-content p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 760px;
+  }
+
+  /* ========== PATHS ========== */
+  .paths-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .path-card {
+    border: 1px solid var(--hairline-strong);
+    padding: 28px 24px 32px;
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .path-card.recommended { border: 1px solid var(--sage); background: var(--sage-soft); }
+  .path-card.adjust { border: 1px solid var(--amber); background: var(--amber-soft); }
+  .path-card.stop { border: 1px solid var(--hairline-strong); background: var(--neutral-soft); }
+
+  .path-letter {
+    font-family: 'Instrument Serif', serif;
+    font-size: 64px;
+    font-style: italic;
+    line-height: 0.9;
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+
+  .path-card.recommended .path-letter { color: var(--sage); }
+  .path-card.adjust .path-letter { color: var(--amber); }
+  .path-card.stop .path-letter { color: var(--ink-soft); }
+
+  .path-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .path-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+
+  .path-body {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ========== ANIMATION ========== */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: reveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    .reveal:nth-child(1) { animation-delay: 0.05s; }
+    .reveal:nth-child(2) { animation-delay: 0.15s; }
+    .reveal:nth-child(3) { animation-delay: 0.25s; }
+    .reveal:nth-child(4) { animation-delay: 0.35s; }
+  }
+
+  @keyframes reveal {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 880px) {
+    .page { padding: 36px 24px; }
+    h1 { font-size: 48px; }
+    .title-block { grid-template-columns: 1fr; gap: 24px; }
+    .alerts-grid { grid-template-columns: 1fr; }
+    .paths-grid { grid-template-columns: 1fr; }
+    .section-head { grid-template-columns: 56px 1fr; gap: 16px; }
+    .section-num { font-size: 40px; }
+    .section-title { font-size: 24px; }
+    .question { grid-template-columns: 56px 1fr; gap: 16px; }
+    .question-num { font-size: 32px; }
+    .question-content h3 { font-size: 20px; }
+    .alert-title { font-size: 20px; }
+  }
+
+  /* ========== PRINT ========== */
+  @media print {
+    body { background: white; font-size: 11pt; }
+    .page { max-width: 100%; padding: 16mm; }
+    section { page-break-inside: avoid; margin-bottom: 32px; }
+    h1 { font-size: 42pt; }
+    .alert-card:hover { background: var(--surface); }
+    @page { size: A4; margin: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="brand">InMinds Technology<span class="dot"></span>Análise FINEP</div>
+    <div class="meta">
+      Documento <strong>INM-FNP-2026-007</strong><br>
+      Uso interno · circulação restrita
+    </div>
+  </header>
+
+  <!-- TITLE -->
+  <section class="title-block reveal">
+    <div>
+      <div class="eyebrow">Análise Preliminar · Cliente</div>
+      <h1>Grupo EPAVI<br><em>projeto IA para CFTV</em></h1>
+      <p class="subtitle">Avaliação de aderência ao edital Mais Inovação Brasil — Rodada 2 (Tecnologias Digitais), publicado em 12 de março de 2026.</p>
+    </div>
+    <div class="status-stamp">
+      <div class="status-label">Status</div>
+      <div class="status-text">Ajustes estruturais necessários antes de submeter</div>
+    </div>
+  </section>
+
+  <!-- ALERTS -->
+  <section class="reveal">
+    <div class="section-head">
+      <div class="section-num">01</div>
+      <div>
+        <h2 class="section-title">Quatro alertas críticos identificados no briefing</h2>
+        <p class="section-lede">Cada um dos pontos a seguir é, isoladamente, capaz de eliminar a proposta na fase de habilitação ou na análise de mérito. Os três primeiros constituem eliminatórios automáticos do edital.</p>
+      </div>
+    </div>
+
+    <div class="alerts-grid">
+
+      <div class="alert-card critical">
+        <div class="alert-num">Alerta 01 · Crítico</div>
+        <h3 class="alert-title">Tropicalização vedada</h3>
+        <p class="alert-body">Servidores Hikvision e licenças HikCentral são produtos estrangeiros maduros. O edital veda explicitamente "tropicalização de solução já utilizada por matriz estrangeira" — encaixe direto e indefensável na proibição.</p>
+      </div>
+
+      <div class="alert-card critical">
+        <div class="alert-num">Alerta 02 · Eliminatório</div>
+        <h3 class="alert-title">Ineditismo zero</h3>
+        <p class="alert-body">Reconhecimento facial, heatmap e contagem de pessoas são tecnologias comerciais maduras há mais de uma década. Os indicadores Abrangência e Incerteza Tecnológica recebem nota zero — reprovação automática na bancada.</p>
+      </div>
+
+      <div class="alert-card critical">
+        <div class="alert-num">Alerta 03 · Crítico</div>
+        <h3 class="alert-title">TRL de entrada incompatível</h3>
+        <p class="alert-body">O edital exige TRL 3 a 6 na entrada. Os componentes Hikvision já estão em TRL 9 — produto comercial em produção mundial. Não há gap tecnológico legítimo a ser desenvolvido durante a vigência do projeto.</p>
+      </div>
+
+      <div class="alert-card warning">
+        <div class="alert-num">Alerta 04 · Atenção</div>
+        <h3 class="alert-title">Equipe sem perfil de P&amp;D</h3>
+        <p class="alert-body">O briefing cita gestor, engenheiro elétrico, implantadores e digitadores. Falta perfil acadêmico — mestres ou doutores — e não há ICT parceira mencionada, exigência obrigatória em todo arranjo FINEP.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- QUESTIONS -->
+  <section class="reveal">
+    <div class="section-head">
+      <div class="section-num">02</div>
+      <div>
+        <h2 class="section-title">Três perguntas-chave para a reunião</h2>
+        <p class="section-lede">As respostas às perguntas abaixo determinam, com clareza operacional, se o projeto pode ser reposicionado, se precisa ser adiado para uma próxima rodada ou se simplesmente não deve ser submetido a este edital.</p>
+      </div>
+    </div>
+
+    <div class="questions">
+
+      <div class="question">
+        <div class="question-num"><em>i</em></div>
+        <div class="question-content">
+          <h3>O que vocês desenvolvem de proprietário hoje?</h3>
+          <p>Existe algoritmo, plataforma, API ou camada de orquestração que será codada pela equipe EPAVI e ficará como ativo da empresa — não da Hikvision? Esta é a pergunta que decide se há ou não um projeto de inovação real a ser financiado.</p>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="question-num"><em>ii</em></div>
+        <div class="question-content">
+          <h3>Qual a saúde financeira atual do EPAVI?</h3>
+          <p>Faturamento anual, patrimônio líquido positivo e resultado operacional do último exercício. A capacidade financeira é eliminatória já na fase de habilitação — antes mesmo da bancada de mérito olhar o conteúdo técnico.</p>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="question-num"><em>iii</em></div>
+        <div class="question-content">
+          <h3>ICT parceira, equipe acadêmica e modelo de produto?</h3>
+          <p>Há ICT em vista? A equipe inclui mestres ou doutores, ou existe disposição para contratá-los? E o produto resultante vira SaaS para outros clientes do mercado, ou é exclusivo do banco-cliente?</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PATHS -->
+  <section class="reveal">
+    <div class="section-head">
+      <div class="section-num">03</div>
+      <div>
+        <h2 class="section-title">Três caminhos possíveis após a reunião</h2>
+        <p class="section-lede">A decisão final depende inteiramente das respostas obtidas. Abaixo, a recomendação preliminar para cada cenário plausível.</p>
+      </div>
+    </div>
+
+    <div class="paths-grid">
+
+      <div class="path-card recommended">
+        <div class="path-letter">A</div>
+        <div class="path-label">Caminho A</div>
+        <h3 class="path-name">Reposicionar e seguir</h3>
+        <p class="path-body">Se há ativo proprietário e ambição SaaS no horizonte: reescrever a proposta como plataforma nacional de IA para CFTV legado, com EPAVI no papel de desenvolvedor e Hikvision rebaixada a uma das fontes de hardware integráveis.</p>
+      </div>
+
+      <div class="path-card adjust">
+        <div class="path-letter">B</div>
+        <div class="path-label">Caminho B</div>
+        <h3 class="path-name">Ajustar e adiar</h3>
+        <p class="path-body">Se faltam ICT parceira, equipe sênior ou saúde financeira mas o projeto tem potencial real: mapear gaps em detalhe, executar correções em janela de sessenta dias e voltar para uma rodada subsequente do edital.</p>
+      </div>
+
+      <div class="path-card stop">
+        <div class="path-letter">C</div>
+        <div class="path-label">Caminho C</div>
+        <h3 class="path-name">Não submeter</h3>
+        <p class="path-body">Se a operação for, de fato, revenda mais integração: economizar a energia investida e redirecionar para linhas de fomento mais aderentes — BNDES, Lei do Bem ou EMBRAPII —, melhor adaptadas ao perfil real do projeto.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div><strong>InMinds Technology</strong> · Consultoria FINEP 2026</div>
+    <div>Documento de discussão — não submeter ao edital</div>
+  </footer>
+
+</div>
+</body>
+</html>
