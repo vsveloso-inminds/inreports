@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude.ai · Por que somos a escolha da Machado Schutz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════
+   BRAND TOKENS — Machado Schutz
+   Verde #00513B (R0 G81 B59 · Pantone 560)
+   Bege  #D7AE81 (R215 G174 B129 · Pantone 728)
+   Font  Frutiger 45/65 → Source Sans 3
+══════════════════════════════ */
+:root{
+  --verde:#00513B; --bege:#D7AE81;
+  --bg:#050f09; --bg2:#081510; --bg3:#0b1a10;
+  --vm:#00764f; --vl:rgba(0,81,59,.14); --vb:rgba(0,81,59,.28);
+  --bf:rgba(215,174,129,.07); --bb:rgba(215,174,129,.14); --bd:rgba(215,174,129,.5);
+  --text:#F0EDE8; --muted:rgba(240,237,232,.5);
+  --border:rgba(215,174,129,.12); --borderh:rgba(215,174,129,.28);
+  --danger:#e05555; --warn:#e09f35; --ok:#00A86B;
+  --ff:'Source Sans 3','Segoe UI','Gill Sans MT',Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+body{background:var(--bg);color:var(--text);font-family:var(--ff);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.02'/%3E%3C/svg%3E");
+  background-size:200px}
+
+/* ── LAYOUT ── */
+.slide{position:relative;z-index:1;min-height:100vh;scroll-snap-align:start;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:60px 5vw;overflow:hidden}
+.s1{background:radial-gradient(ellipse 70% 60% at 6% 15%,rgba(0,81,59,.55) 0%,transparent 65%),radial-gradient(ellipse 45% 38% at 94% 90%,rgba(0,40,25,.5) 0%,transparent 55%),var(--bg)}
+.s2{background:radial-gradient(ellipse 55% 45% at 90% 10%,rgba(0,81,59,.35) 0%,transparent 60%),var(--bg2);border-top:1px solid var(--border)}
+.s3{background:radial-gradient(ellipse 50% 40% at 5% 85%,rgba(0,81,59,.3) 0%,transparent 60%),var(--bg3);border-top:1px solid var(--border)}
+.s4{background:radial-gradient(ellipse 60% 50% at 85% 20%,rgba(0,81,59,.35) 0%,transparent 60%),var(--bg2);border-top:1px solid var(--border)}
+.s5{background:radial-gradient(ellipse 55% 45% at 8% 80%,rgba(0,81,59,.4) 0%,transparent 60%),var(--bg);border-top:1px solid var(--border)}
+.inner{max-width:1080px;margin:0 auto;width:100%}
+.vline{position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--verde)}
+
+/* ── NAV ── */
+.nav-dots{position:fixed;right:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:9px;z-index:100}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--borderh);cursor:pointer;border:1px solid var(--bd);transition:all .3s}
+.dot.active,.dot:hover{background:var(--bege);transform:scale(1.3)}
+.dot-label{position:absolute;right:18px;font-size:9px;font-weight:600;letter-spacing:.08em;color:var(--bege);opacity:0;transition:opacity .2s;white-space:nowrap;background:rgba(5,15,9,.9);padding:3px 8px;border-radius:4px;pointer-events:none}
+.dot:hover .dot-label{opacity:1}
+
+/* ── EYEBROW ── */
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--bege);margin-bottom:20px;animation:fadeUp .6s ease both}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--bege)}
+
+/* ── FOOTER ── */
+.sfoot{display:flex;justify-content:space-between;align-items:center;margin-top:38px;padding-top:15px;border-top:1px solid var(--border);font-size:10px;font-weight:400;letter-spacing:.06em;color:var(--muted)}
+.sfoot-brand{color:var(--bege);font-weight:700;letter-spacing:.04em}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* ════════════════════════════
+   SLIDE 1 — HERO
+════════════════════════════ */
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.hero-eyebrow-pre{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--vm);margin-bottom:12px;animation:fadeUp .5s ease both}
+.hero-title{font-size:clamp(38px,5vw,68px);font-weight:700;line-height:1.05;letter-spacing:-.3px;color:var(--text);margin-bottom:18px;animation:fadeUp .6s .05s ease both}
+.hero-title .light{font-weight:300;color:var(--bege)}
+.hero-title .accent{color:var(--vm)}
+.hero-sub{font-size:15.5px;font-weight:300;color:var(--muted);line-height:1.78;max-width:460px;margin-bottom:32px;animation:fadeUp .6s .1s ease both}
+.hero-sub strong{color:var(--text);font-weight:600}
+
+.hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px;animation:fadeUp .6s .15s ease both}
+.hbadge{padding:5px 14px;border-radius:4px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:1px solid}
+.hb-g{background:var(--vl);color:#6fcfa8;border-color:var(--vb)}
+.hb-b{background:var(--bf);color:var(--bege);border-color:var(--border)}
+
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);border-radius:6px;overflow:hidden;animation:fadeUp .6s .2s ease both}
+.hstat{padding:18px 16px;border-right:1px solid var(--border);background:rgba(255,255,255,.02)}
+.hstat:last-child{border-right:none}
+.hstat-num{font-size:30px;font-weight:700;color:var(--vm);line-height:1;margin-bottom:4px}
+.hstat-num sup{font-size:15px}
+.hstat-lbl{font-size:11px;font-weight:300;color:var(--muted)}
+
+/* HERO RIGHT — quote card */
+.hero-right{animation:fadeUp .7s .12s ease both}
+.quote-card{border:1px solid var(--borderh);border-radius:8px;padding:28px 28px 22px;background:var(--bf);position:relative;overflow:hidden}
+.quote-card::before{content:'"';position:absolute;top:-10px;left:16px;font-size:100px;font-weight:700;color:var(--verde);opacity:.35;line-height:1;font-family:Georgia}
+.qtext{font-size:16px;font-weight:300;font-style:italic;color:var(--text);line-height:1.72;margin-bottom:20px;position:relative;z-index:1}
+.qtext strong{color:var(--bege);font-style:normal;font-weight:600}
+.qsource{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+.why-list{display:flex;flex-direction:column;gap:12px;margin-top:22px}
+.why-item{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid var(--border);border-radius:6px;background:var(--bf);transition:border-color .25s}
+.why-item:hover{border-color:var(--borderh)}
+.why-icon{width:34px;height:34px;border-radius:5px;background:var(--vl);border:1px solid var(--vb);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.why-t{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
+.why-d{font-size:11.5px;font-weight:300;color:var(--muted);line-height:1.55}
+
+/* ════════════════════════════
+   SLIDE 2 — MÓDULOS
+════════════════════════════ */
+.sec-title{font-size:clamp(24px,3vw,40px);font-weight:700;line-height:1.1;color:var(--text);margin-bottom:8px}
+.sec-title .light{color:var(--bege);font-weight:300}
+.sec-sub{font-size:14px;font-weight:300;color:var(--muted);margin-bottom:32px}
+
+.modules-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.mcard{border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .3s,transform .3s}
+.mcard:hover{border-color:var(--borderh);transform:translateY(-2px)}
+
+.mcard-head{padding:20px 22px 16px;border-bottom:1px solid var(--border)}
+.mc-chat .mcard-head{background:linear-gradient(135deg,rgba(0,81,59,.18) 0%,rgba(0,81,59,.06) 100%)}
+.mc-code .mcard-head{background:linear-gradient(135deg,rgba(245,158,11,.1) 0%,rgba(245,158,11,.03) 100%)}
+.mc-cowork .mcard-head{background:linear-gradient(135deg,rgba(59,130,246,.1) 0%,rgba(59,130,246,.03) 100%)}
+.mc-mobile .mcard-head{background:linear-gradient(135deg,rgba(168,85,247,.1) 0%,rgba(168,85,247,.03) 100%)}
+
+.mcard-icon-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.mcard-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.mc-chat .mcard-icon{background:var(--vl);border:1px solid var(--vb)}
+.mc-code .mcard-icon{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)}
+.mc-cowork .mcard-icon{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2)}
+.mc-mobile .mcard-icon{background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.2)}
+
+.mcard-tag{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:4px}
+.mc-chat .mcard-tag{background:var(--vl);color:var(--vm)}
+.mc-code .mcard-tag{background:rgba(245,158,11,.12);color:#F59E0B}
+.mc-cowork .mcard-tag{background:rgba(59,130,246,.1);color:#60A5FA}
+.mc-mobile .mcard-tag{background:rgba(168,85,247,.1);color:#C084FC}
+
+.mcard-name{font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px}
+.mcard-role{font-size:11px;font-weight:300;color:var(--muted)}
+
+.mcard-body{padding:16px 22px 20px;display:flex;flex-direction:column;gap:8px}
+.mfeat{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;font-weight:300;color:var(--muted);line-height:1.5}
+.mfeat::before{content:'→';font-size:11px;flex-shrink:0;margin-top:1px}
+.mc-chat .mfeat::before{color:var(--vm)}
+.mc-code .mfeat::before{color:#F59E0B}
+.mc-cowork .mfeat::before{color:#60A5FA}
+.mc-mobile .mfeat::before{color:#C084FC}
+.mfeat strong{color:var(--text);font-weight:600}
+
+/* ════════════════════════════
+   SLIDE 3 — EXEMPLOS
+════════════════════════════ */
+.examples-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ecard{border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .3s}
+.ecard:hover{border-color:var(--borderh)}
+.ecard-head{padding:16px 18px 12px;border-bottom:1px solid var(--border);background:var(--bf)}
+.ecard-num{font-size:9px;font-weight:700;letter-spacing:.14em;color:var(--vm);text-transform:uppercase;margin-bottom:6px}
+.ecard-title{font-size:14px;font-weight:700;color:var(--text);line-height:1.25}
+.ecard-body{padding:14px 18px 18px}
+.eprompt{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:5px;padding:11px 13px;margin-bottom:12px;font-size:11.5px;font-weight:300;color:var(--muted);font-style:italic;line-height:1.6}
+.eprompt::before{content:'"';color:var(--bege);font-style:normal}
+.eprompt::after{content:'"';color:var(--bege);font-style:normal}
+.eresult-lbl{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--bege);margin-bottom:6px}
+.eresult{font-size:11.5px;font-weight:300;color:var(--muted);line-height:1.6}
+.eresult strong{color:var(--text);font-weight:600}
+.etag{display:inline-block;padding:2px 9px;border-radius:4px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:10px}
+.et-chat{background:var(--vl);color:var(--vm)}
+.et-code{background:rgba(245,158,11,.1);color:#F59E0B}
+.et-cowork{background:rgba(59,130,246,.1);color:#60A5FA}
+
+/* ════════════════════════════
+   SLIDE 4 — COMPARATIVO
+════════════════════════════ */
+.comp-table{border:1px solid var(--border);border-radius:8px;overflow:hidden;width:100%}
+.comp-thead{display:grid;grid-template-columns:220px repeat(4,1fr);background:var(--verde);border-bottom:1px solid rgba(255,255,255,.1)}
+.comp-th{padding:14px 16px;font-size:11px;font-weight:700;letter-spacing:.06em;color:#fff;text-transform:uppercase}
+.comp-th.highlight{background:rgba(255,255,255,.12)}
+.comp-th:first-child{font-size:10px;letter-spacing:.1em}
+
+.comp-row{display:grid;grid-template-columns:220px repeat(4,1fr);border-bottom:1px solid var(--border)}
+.comp-row:last-child{border-bottom:none}
+.comp-row:nth-child(even){background:rgba(255,255,255,.015)}
+.comp-row:hover{background:rgba(215,174,129,.04)}
+
+.comp-cell{padding:13px 16px;font-size:12.5px;font-weight:300;color:var(--muted);display:flex;align-items:center;border-right:1px solid var(--border)}
+.comp-cell:last-child{border-right:none}
+.comp-cell.cat{font-weight:600;color:var(--text);font-size:12px}
+.comp-cell.highlight{background:var(--vl)}
+
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:600;white-space:nowrap}
+.chip-ok{background:rgba(0,168,107,.15);color:#00A86B}
+.chip-warn{background:rgba(224,159,53,.12);color:#e09f35}
+.chip-no{background:rgba(224,85,85,.1);color:#e05555}
+.chip-part{background:rgba(215,174,129,.1);color:var(--bege)}
+
+/* COMP LEGEND */
+.comp-legend{display:flex;gap:16px;margin-top:12px;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.leg-dot{width:8px;height:8px;border-radius:2px}
+
+/* WINNER BOX */
+.winner-box{margin-top:20px;padding:16px 20px;background:var(--vl);border:1px solid var(--vb);border-radius:6px;display:flex;align-items:flex-start;gap:14px}
+.winner-icon{font-size:26px;flex-shrink:0}
+.winner-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.winner-text{font-size:13px;font-weight:300;color:var(--muted);line-height:1.65}
+.winner-text strong{color:#6fcfa8;font-weight:600}
+
+/* ════════════════════════════
+   SLIDE 5 — PLANO
+════════════════════════════ */
+.s5-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.pcard{border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .3s}
+.pcard.rec{border-color:var(--vm);box-shadow:0 0 28px rgba(0,118,79,.14)}
+.pcard:hover{border-color:var(--borderh)}
+
+.phead{padding:20px 22px 16px;border-bottom:1px solid var(--border);background:var(--bf);position:relative}
+.pcard.rec .phead{background:var(--vl)}
+.rec-tag{position:absolute;top:13px;right:13px;padding:3px 11px;border-radius:4px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--verde);color:#fff}
+.pname{font-size:20px;font-weight:700;color:var(--text);margin-bottom:2px}
+.ptype{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.pprice{font-size:32px;font-weight:700;color:var(--vm);line-height:1;margin-bottom:3px}
+.pmeta{font-size:11px;font-weight:300;color:var(--muted)}
+.pbody{padding:14px 22px 20px}
+.pfeat{display:flex;align-items:flex-start;gap:8px;padding:5px 0;font-size:12.5px;font-weight:300;color:var(--muted);line-height:1.5;border-bottom:1px solid rgba(215,174,129,.05)}
+.pfeat:last-child{border-bottom:none}
+.pfeat::before{content:'✓';color:var(--vm);font-size:12px;flex-shrink:0;margin-top:1px}
+.pfeat strong{color:var(--text);font-weight:600}
+
+.calc{border:1px solid var(--border);border-radius:6px;padding:20px 24px;background:var(--bf)}
+.calc-lbl{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--bege);margin-bottom:14px}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.cc{padding:13px 14px;border-right:1px solid var(--border);background:rgba(255,255,255,.02)}
+.cc:last-child{border-right:none}
+.ccl{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.ccv{font-size:18px;font-weight:700;color:var(--text)}
+.ccv.g{color:var(--vm)}.ccv.d{color:var(--bege)}
+.ccs{font-size:10px;font-weight:300;color:var(--muted);margin-top:2px}
+
+.roi{margin-top:12px;padding:12px 16px;background:var(--vl);border:1px solid var(--vb);border-radius:6px;font-size:13px;font-weight:300;color:var(--text);line-height:1.65}
+.roi strong{color:#6fcfa8;font-weight:600}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-grid,.s5-grid{grid-template-columns:1fr}
+  .modules-grid,.examples-grid{grid-template-columns:1fr}
+  .comp-thead,.comp-row{grid-template-columns:1fr}
+  .comp-cell.cat,.comp-th:first-child{background:var(--verde);color:#fff;font-weight:700}
+  .calc-grid{grid-template-columns:1fr 1fr}
+  .hero-stats{grid-template-columns:1fr 1fr 1fr}
+  .slide{padding:44px 18px}
+  .nav-dots{right:10px}
+}
+@media(max-width:500px){
+  .hero-stats,.calc-grid{grid-template-columns:1fr}
+  .examples-grid,.modules-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- ══════════════ SLIDE 1 — HERO ══════════════ -->
+<section class="slide s1" data-title="Por que Claude">
+  <div class="vline"></div>
+  <div class="inner">
+    <div class="eyebrow">Proposta Executiva · InMinds × Machado Schutz</div>
+    <div class="hero-grid">
+
+      <div>
+        <div class="hero-eyebrow-pre">A escolha de quem não aceita segunda melhor</div>
+        <h1 class="hero-title">
+          Por que<br>
+          <span class="light">escolhemos</span><br>
+          <span class="accent">Claude.ai</span>
+        </h1>
+        <p class="hero-sub">
+          No mercado de IA, <strong>nem toda ferramenta é igual</strong>. Para escritórios jurídicos que trabalham com documentos complexos, créditos previdenciários e tributários, a escolha certa não é a mais famosa — é a mais precisa. É a que protege seus dados. É a que raciocina como advogado.
+        </p>
+        <div class="hero-badges">
+          <span class="hbadge hb-g">N°1 em análise jurídica e compliance</span>
+          <span class="hbadge hb-b">Zero treinamento com seus dados</span>
+          <span class="hbadge hb-g">SSO Microsoft Entra ID</span>
+          <span class="hbadge hb-b">200K tokens de contexto</span>
+        </div>
+        <div class="hero-stats">
+          <div class="hstat">
+            <div class="hstat-num">25–100<sup>%</sup></div>
+            <div class="hstat-lbl">ganho de produtividade</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-num">5×</div>
+            <div class="hstat-lbl">mais rápido em análises</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-num">200K</div>
+            <div class="hstat-lbl">tokens de contexto</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="quote-card">
+          <p class="qtext">Claude Opus consistentemente supera o GPT-5 em <strong>análise de documentos jurídicos, revisão de compliance e raciocínio multi-etapa</strong> — exatamente o que escritórios de alta performance precisam.</p>
+          <div class="qsource">Copilot Consulting — Enterprise AI Report · Fev/2026</div>
+        </div>
+        <div class="why-list">
+          <div class="why-item">
+            <div class="why-icon">🧠</div>
+            <div>
+              <div class="why-t">Raciocínio Jurídico Superior</div>
+              <div class="why-d">Treinado em Constitutional AI — respostas precisas, honestas e auditáveis. Sem alucinações disfarçadas de certeza.</div>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">🛡️</div>
+            <div>
+              <div class="why-t">Seus Dados São Seus</div>
+              <div class="why-d">Garantia contratual: seus documentos jamais são usados para treinar modelos. Isso não é política — é arquitetura.</div>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">🔗</div>
+            <div>
+              <div class="why-t">Ecossistema Completo</div>
+              <div class="why-d">Chat + Code + Cowork em um único plano. Nenhuma outra IA oferece isso — cada uma cobra separado ou não tem.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="sfoot">
+      <span class="sfoot-brand">Machado Schutz Advogados · InMinds Technology</span>
+      <span>01 / 05 — scroll ↓</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SLIDE 2 — MÓDULOS ══════════════ -->
+<section class="slide s2" data-title="Os Módulos">
+  <div class="vline"></div>
+  <div class="inner">
+    <div class="eyebrow">O Ecossistema Claude</div>
+    <div class="sec-title">Quatro ferramentas. <span class="light">Um plano.</span> Zero barreiras.</div>
+    <div class="sec-sub">Enquanto concorrentes cobram por cada ferramenta separada, o Claude.ai entrega tudo integrado — do chat ao deploy.</div>
+
+    <div class="modules-grid">
+
+      <!-- CHAT -->
+      <div class="mcard mc-chat">
+        <div class="mcard-head">
+          <div class="mcard-icon-row">
+            <div class="mcard-icon">💬</div>
+            <span class="mcard-tag">Estratégia & Criação</span>
+          </div>
+          <div class="mcard-name">Claude.ai Chat</div>
+          <div class="mcard-role">Navegador · Desktop · Mobile iOS & Android</div>
+        </div>
+        <div class="mcard-body">
+          <div class="mfeat">Análise de documentos jurídicos longos — até <strong>200K tokens</strong> por sessão</div>
+          <div class="mfeat">Redação de pareceres, minutas, atas e relatórios executivos</div>
+          <div class="mfeat">Pesquisa tributária com raciocínio estruturado e citações</div>
+          <div class="mfeat"><strong>Projects</strong> — contexto persistente entre conversas por cliente/caso</div>
+          <div class="mfeat">Integrações com Google Drive, Gmail, Microsoft 365, Slack, GitHub</div>
+          <div class="mfeat">Web search nativo + Deep Research automático</div>
+        </div>
+      </div>
+
+      <!-- CODE -->
+      <div class="mcard mc-code">
+        <div class="mcard-head">
+          <div class="mcard-icon-row">
+            <div class="mcard-icon">⌨️</div>
+            <span class="mcard-tag">Desenvolvimento</span>
+          </div>
+          <div class="mcard-name">Claude Code</div>
+          <div class="mcard-role">Terminal · CLI · Git · Deploy</div>
+        </div>
+        <div class="mcard-body">
+          <div class="mfeat">Cria, edita e revisa arquivos diretamente no repositório Git</div>
+          <div class="mfeat">Git add → commit → push — sem sair do terminal</div>
+          <div class="mfeat">Deploy automático no Vercel, publicação no InReports</div>
+          <div class="mfeat"><strong>Desenvolvimento do SIGMA</strong> — módulos, APIs, integrações</div>
+          <div class="mfeat">Entende o codebase inteiro — não só o arquivo aberto</div>
+          <div class="mfeat">Disponível no plano <strong>Team Premium</strong> (InMinds)</div>
+        </div>
+      </div>
+
+      <!-- COWORK -->
+      <div class="mcard mc-cowork">
+        <div class="mcard-head">
+          <div class="mcard-icon-row">
+            <div class="mcard-icon">⚙️</div>
+            <span class="mcard-tag">Automação Local</span>
+          </div>
+          <div class="mcard-name">Cowork</div>
+          <div class="mcard-role">Windows · macOS · Desktop App</div>
+        </div>
+        <div class="mcard-body">
+          <div class="mfeat">Organiza e move arquivos no computador local automaticamente</div>
+          <div class="mfeat">Executa scripts simples — renomeação em lote, formatação</div>
+          <div class="mfeat"><strong>Gestão de diretórios</strong> — estrutura de pastas de projetos</div>
+          <div class="mfeat">Fluxos de trabalho repetitivos eliminados com um comando</div>
+          <div class="mfeat">Sem precisar de desenvolvedor para tarefas operacionais</div>
+          <div class="mfeat">Disponível no plano <strong>Team Premium</strong></div>
+        </div>
+      </div>
+
+      <!-- MOBILE + DESKTOP -->
+      <div class="mcard mc-mobile">
+        <div class="mcard-head">
+          <div class="mcard-icon-row">
+            <div class="mcard-icon">📱</div>
+            <span class="mcard-tag">Ubiquidade</span>
+          </div>
+          <div class="mcard-name">App Mobile & Desktop</div>
+          <div class="mcard-role">iOS · Android · Windows · macOS</div>
+        </div>
+        <div class="mcard-body">
+          <div class="mfeat">App nativo para <strong>iPhone e Android</strong> — Claude sempre no bolso</div>
+          <div class="mfeat">App desktop para <strong>Windows e macOS</strong> — sem abrir navegador</div>
+          <div class="mfeat">Sincronização total de Projects e conversas entre dispositivos</div>
+          <div class="mfeat">Notificações e uso offline básico via PWA no mobile</div>
+          <div class="mfeat">Diretoria acessa relatórios e consulta Claude de qualquer lugar</div>
+          <div class="mfeat">Incluído em <strong>todos os planos</strong> sem custo adicional</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sfoot">
+      <span class="sfoot-brand">Machado Schutz Advogados · InMinds Technology</span>
+      <span>02 / 05</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SLIDE 3 — EXEMPLOS ══════════════ -->
+<section class="slide s3" data-title="Exemplos Práticos">
+  <div class="vline"></div>
+  <div class="inner">
+    <div class="eyebrow">Na Prática — Machado Schutz</div>
+    <div class="sec-title">O que o time <span class="light">já faz com Claude</span> — e o que vai fazer</div>
+    <div class="sec-sub">Casos de uso reais do contexto tributário e previdenciário — não exemplos genéricos.</div>
+
+    <div class="examples-grid">
+
+      <div class="ecard">
+        <div class="ecard-head">
+          <div class="ecard-num">Caso 01 · Chat</div>
+          <div class="ecard-title">Análise de Viabilidade Previdenciária</div>
+        </div>
+        <div class="ecard-body">
+          <div class="eprompt">Analise este laudo de rubricas e classifique cada item como Provável, Possível ou Remoto com base na jurisprudência do STF e Tema 20</div>
+          <div class="eresult-lbl">Claude entrega em minutos:</div>
+          <div class="eresult">Tabela completa de classificação de risco com <strong>fundamento legal por item</strong>, resumo executivo para apresentar ao cliente e estimativa de crédito por categoria de risco.</div>
+          <span class="etag et-chat">Claude Chat</span>
+        </div>
+      </div>
+
+      <div class="ecard">
+        <div class="ecard-head">
+          <div class="ecard-num">Caso 02 · Chat</div>
+          <div class="ecard-title">Resumo Executivo para Diretoria</div>
+        </div>
+        <div class="ecard-body">
+          <div class="eprompt">Transforme este relatório de 80 páginas do projeto XYZ em um resumo executivo de 1 página para o Dr. Gleison, com KPIs e próximos passos</div>
+          <div class="eresult-lbl">Claude entrega em minutos:</div>
+          <div class="eresult">Documento executivo com <strong>linguagem de diretoria</strong>, KPIs destacados, cronograma simplificado e recomendação de decisão — pronto para apresentar.</div>
+          <span class="etag et-chat">Claude Chat</span>
+        </div>
+      </div>
+
+      <div class="ecard">
+        <div class="ecard-head">
+          <div class="ecard-num">Caso 03 · Chat</div>
+          <div class="ecard-title">Pesquisa Tributária com Reforma</div>
+        </div>
+        <div class="ecard-body">
+          <div class="eprompt">Quais os impactos da LC 214/2025 para clientes do Lucro Presumido com faturamento entre R$ 5M e R$ 50M? Inclua simulação comparativa IBS/CBS vs PIS/COFINS atual</div>
+          <div class="eresult-lbl">Claude entrega em minutos:</div>
+          <div class="eresult">Análise estruturada com <strong>impactos por faixa de faturamento</strong>, tabela comparativa de alíquotas, pontos de atenção e oportunidades de eficiência tributária.</div>
+          <span class="etag et-chat">Claude Chat</span>
+        </div>
+      </div>
+
+      <div class="ecard">
+        <div class="ecard-head">
+          <div class="ecard-num">Caso 04 · Chat</div>
+          <div class="ecard-title">Revisão e Padronização de Contratos</div>
+        </div>
+        <div class="ecard-body">
+          <div class="eprompt">Revise este contrato de honorários, identifique cláusulas de risco jurídico, sugira alterações e padronize a linguagem conforme o padrão do escritório</div>
+          <div class="eresult-lbl">Claude entrega em minutos:</div>
+          <div class="eresult">Contrato revisado com <strong>comentários por cláusula</strong>, lista de riscos identificados, sugestões de redação alternativa e versão limpa para assinatura.</div>
+          <span class="etag et-chat">Claude Chat</span>
+        </div>
+      </div>
+
+      <div class="ecard">
+        <div class="ecard-head">
+          <div class="ecard-num">Caso 05 · Code</div>
+          <div class="ecard-title">Deploy de Relatório no InReports</div>
+        </div>
+        <div class="ecard-body">
+          <div class="eprompt">Cria o HTML do relatório executivo de Abril com os dados atualizados, faz commit no repo inreports e publica no Vercel</div>
+          <div class="eresult-lbl">Claude Code executa:</div>
+          <div class="eresult">Arquivo HTML criado, <strong>git add → commit → push</strong> executado, Vercel detecta e publica em 30 segundos. Yuri recebe o link pelo WhatsApp.</div>
+          <span class="etag et-code">Claude Code</span>
+        </div>
+      </div>
+
+      <div class="ecard">
+        <div class="ecard-head">
+          <div class="ecard-num">Caso 06 · Cowork</div>
+          <div class="ecard-title">Organização de Documentos do Projeto</div>
+        </div>
+        <div class="ecard-body">
+          <div class="eprompt">Organize os documentos baixados da pasta Downloads por CNPJ, crie subpastas por tipo de documento e renomeie com o padrão do escritório</div>
+          <div class="eresult-lbl">Cowork executa:</div>
+          <div class="eresult"><strong>Centenas de arquivos</strong> organizados automaticamente em segundos — sem mover arquivo por arquivo, sem erro humano, sem perda de tempo.</div>
+          <span class="etag et-cowork">Cowork</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sfoot">
+      <span class="sfoot-brand">Machado Schutz Advogados · InMinds Technology</span>
+      <span>03 / 05</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SLIDE 4 — COMPARATIVO ══════════════ -->
+<section class="slide s4" data-title="Comparativo">
+  <div class="vline"></div>
+  <div class="inner">
+    <div class="eyebrow">Comparativo de Mercado · 2026</div>
+    <div class="sec-title">Claude vs <span class="light">as alternativas</span></div>
+    <div class="sec-sub">Dados de benchmarks independentes — sem viés de fornecedor. Contexto: escritório jurídico tributário e previdenciário.</div>
+
+    <div class="comp-table">
+      <div class="comp-thead">
+        <div class="comp-th">Critério</div>
+        <div class="comp-th highlight">Claude.ai ⭐</div>
+        <div class="comp-th">ChatGPT</div>
+        <div class="comp-th">Copilot M365</div>
+        <div class="comp-th">Gemini</div>
+      </div>
+
+      <div class="comp-row">
+        <div class="comp-cell cat">Análise jurídica & compliance</div>
+        <div class="comp-cell highlight"><span class="chip chip-ok">✓ Superior</span></div>
+        <div class="comp-cell"><span class="chip chip-warn">Bom</span></div>
+        <div class="comp-cell"><span class="chip chip-warn">Limitado</span></div>
+        <div class="comp-cell"><span class="chip chip-warn">Bom</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell cat">Janela de contexto</div>
+        <div class="comp-cell highlight"><span class="chip chip-ok">200K tokens</span></div>
+        <div class="comp-cell"><span class="chip chip-warn">128K tokens</span></div>
+        <div class="comp-cell"><span class="chip chip-warn">M365 nativo</span></div>
+        <div class="comp-cell"><span class="chip chip-ok">1M tokens</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell cat">Zero treinamento com seus dados</div>
+        <div class="comp-cell highlight"><span class="chip chip-ok">✓ Garantido</span></div>
+        <div class="comp-cell"><span class="chip chip-warn">Opt-out</span></div>
+        <div class="comp-cell"><span class="chip chip-ok">✓ Sim</span></div>
+        <div class="comp-cell"><span class="chip chip-warn">Opt-out</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell cat">SSO / Microsoft Entra ID</div>
+        <div class="comp-cell highlight"><span class="chip chip-ok">✓ Nativo</span></div>
+        <div class="comp-cell"><span class="chip chip-ok">✓ SAML</span></div>
+        <div class="comp-cell"><span class="chip chip-ok">✓ Nativo</span></div>
+        <div class="comp-cell"><span class="chip chip-warn">Google ID</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell cat">Claude Code (dev terminal)</div>
+        <div class="comp-cell highlight"><span class="chip chip-ok">✓ Incluído</span></div>
+        <div class="comp-cell"><span class="chip chip-no">✗ Não tem</span></div>
+        <div class="comp-cell"><span class="chip chip-part">GitHub Copilot</span></div>
+        <div class="comp-cell"><span class="chip chip-no">✗ Não tem</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell cat">Cowork (automação desktop)</div>
+        <div class="comp-cell highlight"><span class="chip chip-ok">✓ Incluído</span></div>
+        <div class="comp-cell"><span class="chip chip-no">✗ Não tem</span></div>
+        <div class="comp-cell"><span class="chip chip-no">✗ Não tem</span></div>
+        <div class="comp-cell"><span class="chip chip-no">✗ Não tem</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell cat">Integrações nativas no plano</div>
+        <div class="comp-cell highlight"><span class="chip chip-ok">M365 + Google + GitHub</span></div>
+        <div class="comp-cell"><span class="chip chip-warn">Plugins pagos</span></div>
+        <div class="comp-cell"><span class="chip chip-ok">M365 nativo</span></div>
+        <div class="comp-cell"><span class="chip chip-ok">Google Workspace</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell cat">App mobile nativo</div>
+        <div class="comp-cell highlight"><span class="chip chip-ok">iOS + Android</span></div>
+        <div class="comp-cell"><span class="chip chip-ok">iOS + Android</span></div>
+        <div class="comp-cell"><span class="chip chip-ok">iOS + Android</span></div>
+        <div class="comp-cell"><span class="chip chip-ok">iOS + Android</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell cat">Preço base equipe (5 usuários)</div>
+        <div class="comp-cell highlight"><span class="chip chip-ok">R$ 528/mês</span></div>
+        <div class="comp-cell"><span class="chip chip-warn">~R$ 1.500/mês</span></div>
+        <div class="comp-cell"><span class="chip chip-no">~R$ 1.800/mês</span></div>
+        <div class="comp-cell"><span class="chip chip-warn">~R$ 800/mês</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-cell cat">Qualidade de raciocínio jurídico</div>
+        <div class="comp-cell highlight"><span class="chip chip-ok">✓ Benchmark #1</span></div>
+        <div class="comp-cell"><span class="chip chip-warn">Bom</span></div>
+        <div class="comp-cell"><span class="chip chip-warn">Médio</span></div>
+        <div class="comp-cell"><span class="chip chip-warn">Bom</span></div>
+      </div>
+    </div>
+
+    <div class="comp-legend">
+      <div class="leg-item"><div class="leg-dot" style="background:#00A86B"></div>Melhor opção</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#e09f35"></div>Parcial / condicionado</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#e05555"></div>Não disponível</div>
+    </div>
+
+    <div class="winner-box">
+      <div class="winner-icon">🏆</div>
+      <div>
+        <div class="winner-title">Veredicto para Machado Schutz</div>
+        <div class="winner-text">
+          <strong>Claude é o único</strong> que combina raciocínio jurídico superior + Code + Cowork + integrações M365/Google + preço competitivo em um único plano. Copilot só brilha se você usa M365 100% do tempo — Claude funciona em qualquer contexto. ChatGPT é popular mas não tem Code nem Cowork nativos e custa mais. <strong>Para um escritório jurídico que constrói tecnologia própria como o SIGMA: só existe uma escolha.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="sfoot">
+      <span class="sfoot-brand">Machado Schutz Advogados · InMinds Technology</span>
+      <span>04 / 05</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SLIDE 5 — PLANO ══════════════ -->
+<section class="slide s5" data-title="Investimento">
+  <div class="vline"></div>
+  <div class="inner">
+    <div class="eyebrow">Plano e Investimento</div>
+    <div class="sec-title">Plano Team — <span class="light">feito para times jurídicos</span></div>
+    <div class="sec-sub">Governança centralizada, segurança enterprise, todas as ferramentas. Sem surpresas na fatura.</div>
+
+    <div class="s5-grid">
+      <div class="pcard rec">
+        <div class="phead">
+          <div class="rec-tag">⭐ Recomendado · MSA</div>
+          <div class="pname">Assento Padrão</div>
+          <div class="ptype">Analistas · Assistentes · Supervisores · Diretoria</div>
+          <div class="pprice">R$ 105,63</div>
+          <div class="pmeta">/usuário/mês · cobrança anual &nbsp;|&nbsp; R$ 132,04 mensal</div>
+        </div>
+        <div class="pbody">
+          <div class="pfeat">Claude.ai Chat completo — web, iOS, Android, desktop</div>
+          <div class="pfeat">Janela de contexto de <strong>200K tokens</strong></div>
+          <div class="pfeat">Projects — contexto persistente por cliente/caso</div>
+          <div class="pfeat"><strong>Microsoft 365, Outlook, Teams, SharePoint</strong></div>
+          <div class="pfeat">Google Drive, Gmail, Google Calendar, Slack, GitHub</div>
+          <div class="pfeat">Login único <strong>(SSO)</strong> e captura de domínio corporativo</div>
+          <div class="pfeat">Cobrança e administração <strong>centralizadas</strong></div>
+          <div class="pfeat">Busca empresarial em toda a organização</div>
+          <div class="pfeat"><strong>Sem treinamento</strong> com seu conteúdo — garantia contratual</div>
+        </div>
+      </div>
+
+      <div class="pcard">
+        <div class="phead">
+          <div class="pname">Assento Premium</div>
+          <div class="ptype">Desenvolvedores · InMinds · Operações técnicas</div>
+          <div class="pprice">R$ 528,03</div>
+          <div class="pmeta">/usuário/mês · cobrança anual &nbsp;|&nbsp; R$ 660,04 mensal</div>
+        </div>
+        <div class="pbody">
+          <div class="pfeat">Tudo do Assento Padrão</div>
+          <div class="pfeat"><strong>5× mais uso</strong> que assentos padrão</div>
+          <div class="pfeat"><strong>Claude Code</strong> — CLI, Git, deploy no terminal</div>
+          <div class="pfeat"><strong>Cowork</strong> — automação de arquivos no desktop</div>
+          <div class="pfeat">Uso extra disponível nas tarifas de API</div>
+          <div class="pfeat">Ideal para o time <strong>InMinds</strong> construindo o SIGMA</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc">
+      <div class="calc-lbl">Simulação — Machado Schutz · 5 usuários Padrão</div>
+      <div class="calc-grid">
+        <div class="cc">
+          <div class="ccl">Usuários</div>
+          <div class="ccv">5</div>
+          <div class="ccs">Equipe operacional</div>
+        </div>
+        <div class="cc">
+          <div class="ccl">Valor / assento</div>
+          <div class="ccv">R$ 105,63</div>
+          <div class="ccs">Cobrança anual</div>
+        </div>
+        <div class="cc">
+          <div class="ccl">Investimento mensal</div>
+          <div class="ccv g">R$ 528,15</div>
+          <div class="ccs">5 usuários · anual</div>
+        </div>
+        <div class="cc">
+          <div class="ccl">Investimento anual</div>
+          <div class="ccv d">R$ 6.337,80</div>
+          <div class="ccs">Total 12 meses</div>
+        </div>
+      </div>
+      <div class="roi">
+        💡 Com <strong>R$ 528/mês para 5 usuários</strong>, o ROI é obtido com a economia de apenas <strong>~3h por usuário/mês</strong> — equivalente a um parecer, uma análise de viabilidade ou um relatório executivo. Cada hora economizada com Claude vale mais do que o custo do plano inteiro. <strong>É a IA com melhor custo-benefício para escritórios jurídicos no mercado.</strong>
+      </div>
+    </div>
+
+    <div class="sfoot">
+      <span class="sfoot-brand">Machado Schutz Advogados · InMinds Technology</span>
+      <span>05 / 05 · Preços claude.ai · Maio/2026</span>
+    </div>
+  </div>
+</section>
+
+<script>
+// Build nav dots from slides
+const slides=[...document.querySelectorAll('.slide')];
+const nav=document.getElementById('navDots');
+slides.forEach((s,i)=>{
+  const d=document.createElement('div');
+  d.className='dot'+(i===0?' active':'');
+  d.title=s.dataset.title||'';
+  d.onclick=()=>s.scrollIntoView({behavior:'smooth'});
+  nav.appendChild(d);
+});
+const dots=[...nav.querySelectorAll('.dot')];
+slides.forEach(s=>new IntersectionObserver(e=>{
+  e.forEach(x=>{
+    if(x.isIntersecting){
+      const i=slides.indexOf(x.target);
+      dots.forEach((d,j)=>d.classList.toggle('active',i===j));
+    }
+  });
+},{threshold:.5}).observe(s));
+</script>
+</body>
+</html>

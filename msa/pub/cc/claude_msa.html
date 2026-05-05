@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude.ai para Machado Schutz · Proposta Executiva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════
+   BRAND TOKENS — Machado Schutz
+   Ref: Brand book MSH Advogados
+   Verde: R0 G81 B59 · Pantone 560
+   Bege:  R215 G174 B129 · Pantone 728
+   Font:  Frutiger 45/65 → Source Sans 3
+══════════════════════════════ */
+:root {
+  --verde:   #00513B;
+  --bege:    #D7AE81;
+  --bg:      #050f09;
+  --bg2:     #081510;
+  --vm:      #006b4f;
+  --vl:      rgba(0,81,59,.15);
+  --vb:      rgba(0,81,59,.3);
+  --bf:      rgba(215,174,129,.07);
+  --bb:      rgba(215,174,129,.14);
+  --bd:      rgba(215,174,129,.55);
+  --text:    #F0EDE8;
+  --muted:   rgba(240,237,232,.52);
+  --border:  rgba(215,174,129,.13);
+  --borderh: rgba(215,174,129,.3);
+  --ff: 'Source Sans 3','Segoe UI','Gill Sans MT',Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+body{background:var(--bg);color:var(--text);font-family:var(--ff);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.022'/%3E%3C/svg%3E");background-size:200px}
+
+.slide{position:relative;z-index:1;min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;padding:60px 5vw;overflow:hidden}
+.s1{background:radial-gradient(ellipse 65% 55% at 8% 18%,rgba(0,81,59,.5) 0%,transparent 65%),radial-gradient(ellipse 45% 38% at 92% 88%,rgba(0,40,25,.55) 0%,transparent 55%),var(--bg)}
+.s2{background:radial-gradient(ellipse 55% 45% at 88% 12%,rgba(0,81,59,.38) 0%,transparent 60%),radial-gradient(ellipse 45% 38% at 8% 92%,rgba(215,174,129,.05) 0%,transparent 55%),var(--bg2);border-top:1px solid var(--border)}
+.inner{max-width:1080px;margin:0 auto;width:100%}
+
+/* brand vertical line — ref folha timbrada */
+.vline{position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--verde)}
+
+/* nav dots */
+.nav-dots{position:fixed;right:26px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:100}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--borderh);cursor:pointer;border:1px solid var(--bd);transition:all .3s}
+.dot.active,.dot:hover{background:var(--bege);transform:scale(1.3)}
+
+/* eyebrow */
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--bege);margin-bottom:22px;animation:fadeUp .6s ease both}
+.eyebrow::before{content:'';width:22px;height:1px;background:var(--bege)}
+
+/* ── SLIDE 1 ── */
+.s1-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
+.s1-left{animation:fadeUp .7s .05s ease both}
+
+/* Frutiger 65 bold → Source Sans 3 700 */
+.hero-title{font-size:clamp(34px,4.2vw,58px);font-weight:700;line-height:1.08;letter-spacing:-.2px;color:var(--text);margin-bottom:14px}
+.hero-title .light{color:var(--bege);font-weight:300}
+.hero-title .accent{color:var(--vm);font-weight:700}
+
+/* Frutiger 45 light → Source Sans 3 300 */
+.hero-sub{font-size:15px;font-weight:300;color:var(--muted);line-height:1.75;max-width:420px;margin-bottom:28px}
+
+.badge-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:34px}
+.badge{padding:4px 12px;border-radius:4px;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;border:1px solid}
+.bg{background:var(--vl);color:#6fcfa8;border-color:var(--vb)}
+.bb{background:var(--bf);color:var(--bege);border-color:var(--border)}
+
+.stat-row{display:flex;gap:26px;padding-top:26px;border-top:1px solid var(--border)}
+.stat-num{font-size:32px;font-weight:700;color:var(--vm);line-height:1;margin-bottom:3px}
+.stat-num sup{font-size:17px}
+.stat-lbl{font-size:11px;font-weight:300;color:var(--muted)}
+
+/* benefit cards */
+.s1-right{display:flex;flex-direction:column;gap:11px;animation:fadeUp .7s .14s ease both}
+.bcard{border:1px solid var(--border);border-radius:6px;padding:16px 18px;background:var(--bf);display:grid;grid-template-columns:36px 1fr;gap:13px;align-items:start;transition:border-color .25s,background .25s}
+.bcard:hover{border-color:var(--borderh);background:rgba(215,174,129,.1)}
+.bcard-icon{width:36px;height:36px;border-radius:5px;background:var(--vl);border:1px solid var(--vb);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.bcard-t{font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:3px}
+.bcard-d{font-size:12px;font-weight:300;color:var(--muted);line-height:1.65}
+
+.int-bar{border:1px solid var(--border);border-radius:6px;padding:14px 16px;background:var(--bf)}
+.int-lbl{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--bege);margin-bottom:10px}
+.int-pills{display:flex;gap:7px;flex-wrap:wrap}
+.int-pill{padding:3px 10px;border-radius:4px;font-size:11px;font-weight:400;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--text);display:flex;align-items:center;gap:5px}
+
+.slide-foot{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:16px;border-top:1px solid var(--border);font-size:10px;font-weight:400;letter-spacing:.06em;color:var(--muted)}
+.foot-brand{color:var(--bege);font-weight:700;letter-spacing:.04em}
+
+/* ── SLIDE 2 ── */
+.s2-hdr{margin-bottom:34px;animation:fadeUp .6s ease both}
+.s2-title{font-size:clamp(26px,3.2vw,46px);font-weight:700;line-height:1.1;color:var(--text)}
+.s2-title .light{color:var(--bege);font-weight:300}
+.s2-sub{font-size:14px;font-weight:300;color:var(--muted);margin-top:8px}
+
+.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;animation:fadeUp .7s .1s ease both}
+.pcard{border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:border-color .3s}
+.pcard:hover{border-color:var(--borderh)}
+.pcard.rec{border-color:var(--vm);box-shadow:0 0 26px rgba(0,107,79,.14)}
+
+.phead{padding:18px 20px 14px;border-bottom:1px solid var(--border);background:var(--bf);position:relative}
+.pcard.rec .phead{background:var(--vl);border-bottom-color:rgba(0,81,59,.2)}
+
+.rec-tag{position:absolute;top:13px;right:13px;padding:3px 10px;border-radius:4px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--verde);color:#fff}
+
+.pname{font-size:19px;font-weight:700;color:var(--text);margin-bottom:3px}
+.ptype{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:13px}
+.pprice{font-size:30px;font-weight:700;color:var(--vm);line-height:1;margin-bottom:3px}
+.pmeta{font-size:11px;font-weight:300;color:var(--muted)}
+
+.pbody{padding:14px 20px 18px}
+.pfeat{display:flex;align-items:flex-start;gap:8px;padding:5px 0;font-size:12.5px;font-weight:300;color:var(--muted);line-height:1.5;border-bottom:1px solid rgba(215,174,129,.05)}
+.pfeat:last-child{border-bottom:none}
+.pfeat::before{content:'✓';color:var(--vm);font-size:12px;flex-shrink:0;margin-top:1px}
+.pfeat strong{color:var(--text);font-weight:600}
+
+/* calc */
+.calc{border:1px solid var(--border);border-radius:6px;padding:20px 24px;background:var(--bf);animation:fadeUp .7s .2s ease both}
+.calc-lbl{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--bege);margin-bottom:16px}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.cc{padding:13px 15px;border-right:1px solid var(--border);background:rgba(255,255,255,.02)}
+.cc:last-child{border-right:none}
+.ccl{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.ccv{font-size:19px;font-weight:700;color:var(--text)}
+.ccv.g{color:var(--vm)}.ccv.d{color:var(--bege)}
+.ccs{font-size:10px;font-weight:300;color:var(--muted);margin-top:2px}
+
+.roi{margin-top:12px;padding:12px 16px;background:var(--vl);border:1px solid var(--vb);border-radius:6px;font-size:13px;font-weight:300;color:var(--text);line-height:1.65}
+.roi strong{color:#6fcfa8;font-weight:600}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:768px){
+  .s1-grid,.plan-grid{grid-template-columns:1fr}
+  .calc-grid{grid-template-columns:1fr 1fr}
+  .stat-row{gap:16px}
+  .slide{padding:44px 18px}
+  .nav-dots{right:10px}
+}
+@media(max-width:420px){.calc-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav-dots">
+  <div class="dot active" onclick="goTo(0)"></div>
+  <div class="dot" onclick="goTo(1)"></div>
+</nav>
+
+<!-- ══ SLIDE 1 ══ -->
+<section class="slide s1">
+  <div class="vline"></div>
+  <div class="inner">
+
+    <div class="eyebrow">Proposta Executiva · Claude.ai</div>
+
+    <div class="s1-grid">
+      <div class="s1-left">
+        <h1 class="hero-title">
+          Inteligência Artificial<br>
+          <span class="light">para</span> <span class="accent">Machado Schutz</span>
+        </h1>
+        <p class="hero-sub">Claude.ai é a plataforma de IA generativa da Anthropic — desenvolvida para escritórios que exigem precisão, segurança jurídica e resultados reais. Não treina com seus dados. Integra com seu ecossistema.</p>
+        <div class="badge-row">
+          <span class="badge bg">Sem treinamento com seus dados</span>
+          <span class="badge bb">LGPD Compliant</span>
+          <span class="badge bg">SSO Microsoft Entra ID</span>
+          <span class="badge bb">200K tokens de contexto</span>
+        </div>
+        <div class="stat-row">
+          <div>
+            <div class="stat-num">25–100<sup>%</sup></div>
+            <div class="stat-lbl">ganho de produtividade</div>
+          </div>
+          <div>
+            <div class="stat-num">5×</div>
+            <div class="stat-lbl">mais rápido em análises</div>
+          </div>
+          <div>
+            <div class="stat-num">∞</div>
+            <div class="stat-lbl">projetos e documentos</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s1-right">
+        <div class="bcard">
+          <div class="bcard-icon">⚡</div>
+          <div>
+            <div class="bcard-t">Produtividade Jurídica</div>
+            <div class="bcard-d">Relatórios, pareceres, minutas e análises em minutos. Resumos de processos para a diretoria sem horas de trabalho manual.</div>
+          </div>
+        </div>
+        <div class="bcard">
+          <div class="bcard-icon">🔍</div>
+          <div>
+            <div class="bcard-t">Análise de Documentos Fiscais</div>
+            <div class="bcard-d">Upload de DCTFWeb, rubricas, laudos e contratos — Claude analisa, extrai e sintetiza com contexto de 200K tokens.</div>
+          </div>
+        </div>
+        <div class="bcard">
+          <div class="bcard-icon">🤖</div>
+          <div>
+            <div class="bcard-t">Automação de Processos</div>
+            <div class="bcard-d">Checklists, atas, padronização de comunicações e suporte ao workflow do SIGMA — tarefas repetitivas eliminadas.</div>
+          </div>
+        </div>
+        <div class="bcard">
+          <div class="bcard-icon">🔒</div>
+          <div>
+            <div class="bcard-t">Segurança Enterprise</div>
+            <div class="bcard-d">Zero treinamento com dados do escritório. SSO via Microsoft Entra ID. Controle centralizado de acessos por usuário.</div>
+          </div>
+        </div>
+        <div class="int-bar">
+          <div class="int-lbl">Integrações nativas incluídas no plano</div>
+          <div class="int-pills">
+            <div class="int-pill">🟦 Microsoft 365</div>
+            <div class="int-pill">📧 Outlook</div>
+            <div class="int-pill">💬 Teams · Slack</div>
+            <div class="int-pill">📁 SharePoint</div>
+            <div class="int-pill">🟢 Google Drive</div>
+            <div class="int-pill">🐙 GitHub</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="foot-brand">Machado Schutz Advogados · InMinds Technology</span>
+      <span>01 / 02 — rolar para investimento ↓</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 2 ══ -->
+<section class="slide s2">
+  <div class="vline"></div>
+  <div class="inner">
+
+    <div class="eyebrow">Plano e Investimento</div>
+
+    <div class="s2-hdr">
+      <h2 class="s2-title">Plano <span class="light">Team</span> — feito para times jurídicos</h2>
+      <p class="s2-sub">Plataforma compartilhada com governança centralizada e integração total com o ecossistema do escritório.</p>
+    </div>
+
+    <div class="plan-grid">
+      <div class="pcard rec">
+        <div class="phead">
+          <div class="rec-tag">⭐ Recomendado</div>
+          <div class="pname">Assento Padrão</div>
+          <div class="ptype">Analistas · Assistentes · Diretoria</div>
+          <div class="pprice">R$ 105,63</div>
+          <div class="pmeta">/usuário/mês · cobrança anual<br>R$ 132,04/mês se cobrança mensal</div>
+        </div>
+        <div class="pbody">
+          <div class="pfeat">Todos os recursos do Claude — web, mobile, desktop</div>
+          <div class="pfeat">Janela de contexto de <strong>200K tokens</strong></div>
+          <div class="pfeat">Mais uso que o plano Pro individual</div>
+          <div class="pfeat"><strong>Microsoft 365, Slack</strong> e muito mais</div>
+          <div class="pfeat">Login único <strong>(SSO)</strong> e captura de domínio</div>
+          <div class="pfeat">Cobrança e administração <strong>centralizadas</strong></div>
+          <div class="pfeat">Busca empresarial em toda a organização</div>
+          <div class="pfeat"><strong>Sem treinamento</strong> com seu conteúdo por padrão</div>
+        </div>
+      </div>
+
+      <div class="pcard">
+        <div class="phead">
+          <div class="pname">Assento Premium</div>
+          <div class="ptype">Desenvolvedores · Operações avançadas</div>
+          <div class="pprice">R$ 528,03</div>
+          <div class="pmeta">/usuário/mês · cobrança anual<br>R$ 660,04/mês se cobrança mensal</div>
+        </div>
+        <div class="pbody">
+          <div class="pfeat">Tudo do Assento Padrão</div>
+          <div class="pfeat"><strong>5× mais uso</strong> que assentos padrão</div>
+          <div class="pfeat"><strong>Claude Code</strong> — desenvolvimento no terminal</div>
+          <div class="pfeat"><strong>Cowork</strong> — automação de arquivos no desktop</div>
+          <div class="pfeat">Uso extra disponível com tarifas de API</div>
+          <div class="pfeat">Ideal para time <strong>InMinds</strong> e operações técnicas</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc">
+      <div class="calc-lbl">Simulação de Investimento — Machado Schutz · 5 usuários</div>
+      <div class="calc-grid">
+        <div class="cc">
+          <div class="ccl">Usuários</div>
+          <div class="ccv">5</div>
+          <div class="ccs">Equipe operacional</div>
+        </div>
+        <div class="cc">
+          <div class="ccl">Valor / assento</div>
+          <div class="ccv">R$ 105,63</div>
+          <div class="ccs">Cobrança anual</div>
+        </div>
+        <div class="cc">
+          <div class="ccl">Investimento mensal</div>
+          <div class="ccv g">R$ 528,15</div>
+          <div class="ccs">5 usuários · anual</div>
+        </div>
+        <div class="cc">
+          <div class="ccl">Investimento anual</div>
+          <div class="ccv d">R$ 6.337,80</div>
+          <div class="ccs">Total 12 meses</div>
+        </div>
+      </div>
+      <div class="roi">
+        💡 Com <strong>5 usuários × R$ 528/mês</strong>, o ROI é atingido com a economia de apenas <strong>~3h de trabalho por usuário/mês</strong> — equivalente a um parecer, uma análise de viabilidade ou um relatório executivo. O escritório já entrega isso em minutos com Claude.
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="foot-brand">Machado Schutz Advogados · InMinds Technology</span>
+      <span>02 / 02 · Preços claude.ai · Maio/2026</span>
+    </div>
+  </div>
+</section>
+
+<script>
+const dots=[...document.querySelectorAll('.dot')];
+const slides=[...document.querySelectorAll('.slide')];
+slides.forEach(s=>new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting){const i=slides.indexOf(x.target);dots.forEach((d,j)=>d.classList.toggle('active',i===j))}});
+},{threshold:.5}).observe(s));
+function goTo(i){slides[i].scrollIntoView({behavior:'smooth'})}
+</script>
+</body>
+</html>
